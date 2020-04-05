@@ -30,6 +30,7 @@
         {
             this.btn = new System.Windows.Forms.Button();
             this.rickTextBox = new System.Windows.Forms.RichTextBox();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn
@@ -44,22 +45,31 @@
             // 
             // rickTextBox
             // 
-            this.rickTextBox.Location = new System.Drawing.Point(117, 12);
+            this.rickTextBox.Location = new System.Drawing.Point(181, 12);
             this.rickTextBox.Name = "rickTextBox";
-            this.rickTextBox.Size = new System.Drawing.Size(921, 646);
+            this.rickTextBox.Size = new System.Drawing.Size(857, 646);
             this.rickTextBox.TabIndex = 1;
             this.rickTextBox.Text = "";
+            // 
+            // textBox
+            // 
+            this.textBox.Location = new System.Drawing.Point(11, 56);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(164, 22);
+            this.textBox.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 670);
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.rickTextBox);
             this.Controls.Add(this.btn);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -67,6 +77,7 @@
 
         private System.Windows.Forms.Button btn;
         private System.Windows.Forms.RichTextBox rickTextBox;
+        private System.Windows.Forms.TextBox textBox;
     }
 }
 

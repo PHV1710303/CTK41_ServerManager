@@ -8,3 +8,13 @@ D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.csproj.GenerateResource.cache
 D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
 D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.exe
 D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.pdb
+D:\GitHub\CTK41_ServerManager\Test\bin\Debug\Test.exe.config
+D:\GitHub\CTK41_ServerManager\Test\bin\Debug\Test.exe
+D:\GitHub\CTK41_ServerManager\Test\bin\Debug\Test.pdb
+D:\GitHub\CTK41_ServerManager\Test\obj\Debug\Test.csprojAssemblyReference.cache
+D:\GitHub\CTK41_ServerManager\Test\obj\Debug\Test.Form1.resources
+D:\GitHub\CTK41_ServerManager\Test\obj\Debug\Test.Properties.Resources.resources
+D:\GitHub\CTK41_ServerManager\Test\obj\Debug\Test.csproj.GenerateResource.cache
+D:\GitHub\CTK41_ServerManager\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\GitHub\CTK41_ServerManager\Test\obj\Debug\Test.exe
+D:\GitHub\CTK41_ServerManager\Test\obj\Debug\Test.pdb

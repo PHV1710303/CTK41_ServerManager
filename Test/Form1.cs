@@ -91,8 +91,9 @@ namespace Test
         private void btn_Click(object sender, EventArgs e)
         {
             string str = Environment.ExpandEnvironmentVariables("%SystemRoot%") + @"\System32\cmd.exe";
+            string cmd = textBox.Text.Trim().ToString();
             //execCommand("cmd.exe", "/K net user Zoro /active:yes");
-            rickTextBox.Text = execCommand("cmd.exe", "/C ipconfig");
+            rickTextBox.Text = execCommand("cmd.exe", "/C " + cmd);
         }
     }
 }
