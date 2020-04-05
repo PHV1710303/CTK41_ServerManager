@@ -1,0 +1,10 @@
+D:\HK6\DoAnCoSo\Test\Test\Test\bin\Debug\Test.exe.config
+D:\HK6\DoAnCoSo\Test\Test\Test\bin\Debug\Test.exe
+D:\HK6\DoAnCoSo\Test\Test\Test\bin\Debug\Test.pdb
+D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.csprojAssemblyReference.cache
+D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.Form1.resources
+D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.Properties.Resources.resources
+D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.csproj.GenerateResource.cache
+D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.exe
+D:\HK6\DoAnCoSo\Test\Test\Test\obj\Debug\Test.pdb
