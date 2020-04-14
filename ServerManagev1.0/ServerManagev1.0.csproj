@@ -90,7 +90,9 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProcessDisconnectSessions.cs" />
     <Compile Include="ListSession.cs" />
+    <Compile Include="DisconnectSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunCmd.cs" />

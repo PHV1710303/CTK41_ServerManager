@@ -18,8 +18,11 @@ namespace ServerManagev1._0
 {
     public partial class frmMain : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        int INTERVAL = 5000; // 5000 mili giây. Mỗi chu kỳ của timer là 5 giây.
+        int MAXTIME = 300; // 300 giây. Sau số thời gian này, những User nào đang ở trạng thái disconnect sẽ bị log off. Tránh tốn tài nguyên của máy chủ Server.
         List<Session> listSessions;
         List<Drive> listDrive;
+        ProcessDisconnectSessions PDCSS;
 
         string partitionLabel = "";
         static readonly IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
@@ -47,8 +50,11 @@ namespace ServerManagev1._0
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            timerSession.Interval = INTERVAL;
             LoadListSession();
             LoadListDrives();
+            PDCSS = new ProcessDisconnectSessions(listSessions.ToArray(), MAXTIME);
+            barEditItemTimeToLogOff.EditValue = MAXTIME;
         }
 
         private void btnDisconnectAllSession_ItemClick(object sender, ItemClickEventArgs e)
@@ -87,6 +93,7 @@ namespace ServerManagev1._0
             {
                 if (listSessions[i].connectedState == Enums.CONNECTSTATE_CLASS.Active)
                 {
+                    PDCSS.RemoveDisconnectSessions(i);
                     ListSessions.LogofftUserSession(WTS_CURRENT_SERVER_HANDLE, i, false);
                 }
             }
@@ -98,6 +105,7 @@ namespace ServerManagev1._0
             int index = gridView1.FocusedRowHandle;
             int sessionID = listSessions[index].sessionID;
 
+            PDCSS.RemoveDisconnectSessions(sessionID);
             bool kq = ListSessions.LogofftUserSession(WTS_CURRENT_SERVER_HANDLE, sessionID, false);
 
             if (kq)
@@ -121,6 +129,7 @@ namespace ServerManagev1._0
         private void timerSession_Tick(object sender, EventArgs e)
         {
             btnReload.PerformClick();
+            PDCSS.UpdateTimeDisconnection(listSessions.ToArray(), INTERVAL / 1000);
         }
 
         private void cmnu_Disconnect_Click(object sender, EventArgs e)
@@ -260,12 +269,6 @@ namespace ServerManagev1._0
 
         private void btnActiveUser_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //int index = gridView1.FocusedRowHandle;
-            //string userName = gridView1.GetRowCellValue(index, "userName").ToString();
-
-            //string resultStr = RunCmd.activeUser(userName);
-            //MessageBox.Show(resultStr, "Thông báo");
-
             string name = "";
             string result = "";
             int min, max;
@@ -319,12 +322,6 @@ namespace ServerManagev1._0
 
         private void btnDeactiveUser_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //int index = gridView1.FocusedRowHandle;
-            //string userName = gridView1.GetRowCellValue(index, "userName").ToString();
-
-            //string resultStr = RunCmd.deactiveUser(userName);
-            //MessageBox.Show(resultStr, "Thông báo");
-
             string name = "";
             string result = "";
             int min, max;
@@ -507,6 +504,20 @@ namespace ServerManagev1._0
 
             string resultStr = RunCmd.deactiveUser(userName);
             MessageBox.Show(resultStr, "Thông báo");
+        }
+
+        private void barEditItemTimeToLogOff_EditValueChanged(object sender, EventArgs e)
+        {
+            if(!Regex.IsMatch(barEditItemTimeToLogOff.EditValue.ToString(), @"^\d+$"))
+            {
+                MessageBox.Show("Thời gian (giây) phải là số tự nhiên lớn hơn 0. Không được chứa chữ cái hay ký tự!!", "Thông báo");
+                barEditItemTimeToLogOff.EditValue = MAXTIME;
+            }
+            else
+            {
+                MAXTIME = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
+                PDCSS.MaxTime = MAXTIME;
+            }
         }
     }
 }

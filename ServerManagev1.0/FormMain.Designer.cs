@@ -57,10 +57,16 @@
             this.repositoryItemTextEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.btnAddUser = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeleteUser = new DevExpress.XtraBars.BarButtonItem();
+            this.barEditItemTimeToLogOff = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.barStaticItemTimeDisconnect = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -77,13 +83,13 @@
             this.cmnu_Disconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.cmnu_LogoffUser = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmnu_DeleteUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmnu_ActiveUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmnu_DeactiveUser = new System.Windows.Forms.ToolStripMenuItem();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.timerSession = new System.Windows.Forms.Timer(this.components);
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.barEditItem2 = new DevExpress.XtraBars.BarEditItem();
-            this.cmnu_DeleteUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmnu_ActiveUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmnu_DeactiveUser = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit_Min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit_Max)).BeginInit();
@@ -92,6 +98,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListSession)).BeginInit();
@@ -123,10 +130,14 @@
             this.barEditItemUserMin,
             this.barEditItemUserMax,
             this.btnAddUser,
-            this.btnDeleteUser});
+            this.btnDeleteUser,
+            this.barEditItemTimeToLogOff,
+            this.barStaticItemTimeDisconnect,
+            this.barStaticItem1,
+            this.barStaticItem2});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 27;
+            this.ribbonControl1.MaxItemId = 32;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -141,7 +152,8 @@
             this.repositoryItemTextEdit1,
             this.repositoryItemTextEdit2,
             this.repositoryItemTextEdit3,
-            this.repositoryItemTextEdit4});
+            this.repositoryItemTextEdit4,
+            this.repositoryItemTextEdit5});
             this.ribbonControl1.Size = new System.Drawing.Size(1156, 178);
             this.ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
@@ -334,19 +346,53 @@
             this.btnDeleteUser.Name = "btnDeleteUser";
             this.btnDeleteUser.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteUser_ItemClick);
             // 
+            // barEditItemTimeToLogOff
+            // 
+            this.barEditItemTimeToLogOff.Caption = "giây";
+            this.barEditItemTimeToLogOff.CaptionAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.barEditItemTimeToLogOff.Edit = this.repositoryItemTextEdit5;
+            this.barEditItemTimeToLogOff.Hint = "Số giây";
+            this.barEditItemTimeToLogOff.Id = 27;
+            this.barEditItemTimeToLogOff.Name = "barEditItemTimeToLogOff";
+            this.barEditItemTimeToLogOff.EditValueChanged += new System.EventHandler(this.barEditItemTimeToLogOff_EditValueChanged);
+            // 
+            // repositoryItemTextEdit5
+            // 
+            this.repositoryItemTextEdit5.AutoHeight = false;
+            this.repositoryItemTextEdit5.Name = "repositoryItemTextEdit5";
+            // 
+            // barStaticItemTimeDisconnect
+            // 
+            this.barStaticItemTimeDisconnect.Id = 29;
+            this.barStaticItemTimeDisconnect.Name = "barStaticItemTimeDisconnect";
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "Thời gian tự động logoff";
+            this.barStaticItem1.Id = 30;
+            this.barStaticItem1.Name = "barStaticItem1";
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "những User đã ngắt kết nối.";
+            this.barStaticItem2.Id = 31;
+            this.barStaticItem2.Name = "barStaticItem2";
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
             this.ribbonPageGroup2,
-            this.ribbonPageGroup3});
+            this.ribbonPageGroup3,
+            this.ribbonPageGroup10});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Quản lý Sessions";
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnDisconnectAllSession);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnDisconnectSession);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barStaticItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barStaticItem2);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barEditItemTimeToLogOff);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.ShowCaptionButton = false;
             this.ribbonPageGroup1.Text = " ";
@@ -361,10 +407,17 @@
             // 
             // ribbonPageGroup3
             // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnReload);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnDisconnectAllSession);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnDisconnectSession);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.ShowCaptionButton = false;
             this.ribbonPageGroup3.Text = " ";
+            // 
+            // ribbonPageGroup10
+            // 
+            this.ribbonPageGroup10.ItemLinks.Add(this.btnReload);
+            this.ribbonPageGroup10.Name = "ribbonPageGroup10";
+            this.ribbonPageGroup10.ShowCaptionButton = false;
             // 
             // ribbonPage2
             // 
@@ -464,7 +517,7 @@
             this.sessionToolStripMenuItem,
             this.usersToolStripMenuItem});
             this.contextMenuStripSession.Name = "contextMenuStripSession";
-            this.contextMenuStripSession.Size = new System.Drawing.Size(211, 80);
+            this.contextMenuStripSession.Size = new System.Drawing.Size(128, 52);
             // 
             // sessionToolStripMenuItem
             // 
@@ -496,8 +549,29 @@
             this.cmnu_ActiveUser,
             this.cmnu_DeactiveUser});
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.usersToolStripMenuItem.Text = "Users";
+            // 
+            // cmnu_DeleteUser
+            // 
+            this.cmnu_DeleteUser.Name = "cmnu_DeleteUser";
+            this.cmnu_DeleteUser.Size = new System.Drawing.Size(188, 26);
+            this.cmnu_DeleteUser.Text = "Xóa User";
+            this.cmnu_DeleteUser.Click += new System.EventHandler(this.cmnu_DeleteUser_Click);
+            // 
+            // cmnu_ActiveUser
+            // 
+            this.cmnu_ActiveUser.Name = "cmnu_ActiveUser";
+            this.cmnu_ActiveUser.Size = new System.Drawing.Size(188, 26);
+            this.cmnu_ActiveUser.Text = "Kích hoạt User";
+            this.cmnu_ActiveUser.Click += new System.EventHandler(this.cmnu_ActiveUser_Click);
+            // 
+            // cmnu_DeactiveUser
+            // 
+            this.cmnu_DeactiveUser.Name = "cmnu_DeactiveUser";
+            this.cmnu_DeactiveUser.Size = new System.Drawing.Size(188, 26);
+            this.cmnu_DeactiveUser.Text = "Tạm ngắt User";
+            this.cmnu_DeactiveUser.Click += new System.EventHandler(this.cmnu_DeactiveUser_Click);
             // 
             // gridView1
             // 
@@ -530,27 +604,6 @@
             this.barEditItem2.Id = 11;
             this.barEditItem2.Name = "barEditItem2";
             // 
-            // cmnu_DeleteUser
-            // 
-            this.cmnu_DeleteUser.Name = "cmnu_DeleteUser";
-            this.cmnu_DeleteUser.Size = new System.Drawing.Size(224, 26);
-            this.cmnu_DeleteUser.Text = "Xóa User";
-            this.cmnu_DeleteUser.Click += new System.EventHandler(this.cmnu_DeleteUser_Click);
-            // 
-            // cmnu_ActiveUser
-            // 
-            this.cmnu_ActiveUser.Name = "cmnu_ActiveUser";
-            this.cmnu_ActiveUser.Size = new System.Drawing.Size(224, 26);
-            this.cmnu_ActiveUser.Text = "Kích hoạt User";
-            this.cmnu_ActiveUser.Click += new System.EventHandler(this.cmnu_ActiveUser_Click);
-            // 
-            // cmnu_DeactiveUser
-            // 
-            this.cmnu_DeactiveUser.Name = "cmnu_DeactiveUser";
-            this.cmnu_DeactiveUser.Size = new System.Drawing.Size(224, 26);
-            this.cmnu_DeactiveUser.Text = "Tạm ngắt User";
-            this.cmnu_DeactiveUser.Click += new System.EventHandler(this.cmnu_DeactiveUser_Click);
-            // 
             // frmMain
             // 
             this.Appearance.Options.UseFont = true;
@@ -574,6 +627,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListSession)).EndInit();
@@ -640,6 +694,12 @@
         private System.Windows.Forms.ToolStripMenuItem cmnu_DeleteUser;
         private System.Windows.Forms.ToolStripMenuItem cmnu_ActiveUser;
         private System.Windows.Forms.ToolStripMenuItem cmnu_DeactiveUser;
+        private DevExpress.XtraBars.BarEditItem barEditItemTimeToLogOff;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit5;
+        private DevExpress.XtraBars.BarStaticItem barStaticItemTimeDisconnect;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup10;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
     }
 }
 
