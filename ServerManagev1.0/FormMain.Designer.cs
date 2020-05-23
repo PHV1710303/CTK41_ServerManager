@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnDisconnectAllSession = new DevExpress.XtraBars.BarButtonItem();
             this.btnDisconnectSession = new DevExpress.XtraBars.BarButtonItem();
@@ -62,6 +63,24 @@
             this.barStaticItemTimeDisconnect = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.barEditItemSQLUsername = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit6 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.barEditItemSQLUserMin = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit7 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.barEditItemSQLUserMax = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.btnThemUserMSSQL = new DevExpress.XtraBars.BarButtonItem();
+            this.btnXoaUserMSSQL = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barCbb_ServerRole = new DevExpress.XtraBars.BarEditItem();
+            this.cbbEdit_ServerRole = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.barEditItem3 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.barEditItem4 = new DevExpress.XtraBars.BarEditItem();
+            this.btn_GrantPermission = new DevExpress.XtraBars.BarButtonItem();
+            this.btn_DenyPermission = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -75,6 +94,11 @@
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup12 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup_Permission = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup14 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.editMin = new DevExpress.XtraEditors.Repository.RepositoryItemPageNumberEdit();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridListSession = new DevExpress.XtraGrid.GridControl();
@@ -90,6 +114,7 @@
             this.timerSession = new System.Windows.Forms.Timer(this.components);
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.barEditItem2 = new DevExpress.XtraBars.BarEditItem();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit_Min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit_Max)).BeginInit();
@@ -99,12 +124,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbEdit_ServerRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListSession)).BeginInit();
             this.contextMenuStripSession.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
             // 
             // ribbonControl1
             // 
@@ -134,15 +171,29 @@
             this.barEditItemTimeToLogOff,
             this.barStaticItemTimeDisconnect,
             this.barStaticItem1,
-            this.barStaticItem2});
+            this.barStaticItem2,
+            this.barEditItemSQLUsername,
+            this.barEditItemSQLUserMin,
+            this.barEditItemSQLUserMax,
+            this.btnThemUserMSSQL,
+            this.btnXoaUserMSSQL,
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barCbb_ServerRole,
+            this.barStaticItem3,
+            this.barEditItem3,
+            this.barEditItem4,
+            this.btn_GrantPermission,
+            this.btn_DenyPermission});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 32;
+            this.ribbonControl1.MaxItemId = 46;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage2,
-            this.ribboPage3});
+            this.ribboPage3,
+            this.ribbonPage3});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.editMin,
             this.repositoryItemButtonEdit1,
@@ -153,7 +204,12 @@
             this.repositoryItemTextEdit2,
             this.repositoryItemTextEdit3,
             this.repositoryItemTextEdit4,
-            this.repositoryItemTextEdit5});
+            this.repositoryItemTextEdit5,
+            this.repositoryItemTextEdit6,
+            this.repositoryItemTextEdit7,
+            this.repositoryItemTextEdit8,
+            this.cbbEdit_ServerRole,
+            this.repositoryItemComboBox1});
             this.ribbonControl1.Size = new System.Drawing.Size(1156, 178);
             this.ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
@@ -378,6 +434,131 @@
             this.barStaticItem2.Id = 31;
             this.barStaticItem2.Name = "barStaticItem2";
             // 
+            // barEditItemSQLUsername
+            // 
+            this.barEditItemSQLUsername.Caption = "Tên User";
+            this.barEditItemSQLUsername.Edit = this.repositoryItemTextEdit6;
+            this.barEditItemSQLUsername.Id = 33;
+            this.barEditItemSQLUsername.Name = "barEditItemSQLUsername";
+            // 
+            // repositoryItemTextEdit6
+            // 
+            this.repositoryItemTextEdit6.AutoHeight = false;
+            this.repositoryItemTextEdit6.Name = "repositoryItemTextEdit6";
+            // 
+            // barEditItemSQLUserMin
+            // 
+            this.barEditItemSQLUserMin.Caption = "Min  ";
+            this.barEditItemSQLUserMin.Edit = this.repositoryItemTextEdit7;
+            this.barEditItemSQLUserMin.EditValue = 301;
+            this.barEditItemSQLUserMin.Id = 34;
+            this.barEditItemSQLUserMin.Name = "barEditItemSQLUserMin";
+            // 
+            // repositoryItemTextEdit7
+            // 
+            this.repositoryItemTextEdit7.AutoHeight = false;
+            this.repositoryItemTextEdit7.Name = "repositoryItemTextEdit7";
+            // 
+            // barEditItemSQLUserMax
+            // 
+            this.barEditItemSQLUserMax.Caption = "Max ";
+            this.barEditItemSQLUserMax.Edit = this.repositoryItemTextEdit8;
+            this.barEditItemSQLUserMax.EditValue = 303;
+            this.barEditItemSQLUserMax.Id = 35;
+            this.barEditItemSQLUserMax.Name = "barEditItemSQLUserMax";
+            // 
+            // repositoryItemTextEdit8
+            // 
+            this.repositoryItemTextEdit8.AutoHeight = false;
+            this.repositoryItemTextEdit8.Name = "repositoryItemTextEdit8";
+            // 
+            // btnThemUserMSSQL
+            // 
+            this.btnThemUserMSSQL.Caption = "Tạo account SQL mới";
+            this.btnThemUserMSSQL.Id = 36;
+            this.btnThemUserMSSQL.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnThemUserMSSQL.ImageOptions.LargeImage")));
+            this.btnThemUserMSSQL.Name = "btnThemUserMSSQL";
+            this.btnThemUserMSSQL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThemUserMSSQL_ItemClick);
+            // 
+            // btnXoaUserMSSQL
+            // 
+            this.btnXoaUserMSSQL.Caption = "Xóa account SQL";
+            this.btnXoaUserMSSQL.Id = 37;
+            this.btnXoaUserMSSQL.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXoaUserMSSQL.ImageOptions.LargeImage")));
+            this.btnXoaUserMSSQL.Name = "btnXoaUserMSSQL";
+            this.btnXoaUserMSSQL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXoaUserMSSQL_ItemClick);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 38;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "barButtonItem2";
+            this.barButtonItem2.Id = 39;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barCbb_ServerRole
+            // 
+            this.barCbb_ServerRole.Edit = this.cbbEdit_ServerRole;
+            this.barCbb_ServerRole.EditWidth = 70;
+            this.barCbb_ServerRole.Id = 40;
+            this.barCbb_ServerRole.Name = "barCbb_ServerRole";
+            this.barCbb_ServerRole.EditValueChanged += new System.EventHandler(this.barCbb_ServerRole_EditValueChanged);
+            // 
+            // cbbEdit_ServerRole
+            // 
+            this.cbbEdit_ServerRole.AutoHeight = false;
+            this.cbbEdit_ServerRole.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbEdit_ServerRole.DropDownRows = 10;
+            this.cbbEdit_ServerRole.Name = "cbbEdit_ServerRole";
+            // 
+            // barStaticItem3
+            // 
+            this.barStaticItem3.Caption = "Chọn quyền";
+            this.barStaticItem3.Id = 41;
+            this.barStaticItem3.Name = "barStaticItem3";
+            // 
+            // barEditItem3
+            // 
+            this.barEditItem3.Caption = "barEditItem3";
+            this.barEditItem3.Edit = this.repositoryItemComboBox1;
+            this.barEditItem3.Id = 42;
+            this.barEditItem3.Name = "barEditItem3";
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            // 
+            // barEditItem4
+            // 
+            this.barEditItem4.Caption = "barEditItem4";
+            this.barEditItem4.Edit = this.repositoryItemComboBox2;
+            this.barEditItem4.Id = 43;
+            this.barEditItem4.Name = "barEditItem4";
+            // 
+            // btn_GrantPermission
+            // 
+            this.btn_GrantPermission.Caption = "Cấp quyền";
+            this.btn_GrantPermission.Id = 44;
+            this.btn_GrantPermission.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btn_GrantPermission.ImageOptions.LargeImage")));
+            this.btn_GrantPermission.Name = "btn_GrantPermission";
+            this.btn_GrantPermission.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_GrantPermission_ItemClick);
+            // 
+            // btn_DenyPermission
+            // 
+            this.btn_DenyPermission.Caption = "Thu hồi quyền";
+            this.btn_DenyPermission.Id = 45;
+            this.btn_DenyPermission.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btn_DenyPermission.ImageOptions.LargeImage")));
+            this.btn_DenyPermission.Name = "btn_DenyPermission";
+            this.btn_DenyPermission.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_DenyPermission_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -390,9 +571,8 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.barStaticItem1);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barStaticItem2);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barEditItemTimeToLogOff);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnDisconnectAllSession);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnDisconnectSession);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.ShowCaptionButton = false;
             this.ribbonPageGroup1.Text = " ";
@@ -407,15 +587,16 @@
             // 
             // ribbonPageGroup3
             // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnDisconnectAllSession);
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnDisconnectSession);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnReload);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.ShowCaptionButton = false;
             this.ribbonPageGroup3.Text = " ";
             // 
             // ribbonPageGroup10
             // 
-            this.ribbonPageGroup10.ItemLinks.Add(this.btnReload);
+            this.ribbonPageGroup10.ItemLinks.Add(this.barStaticItem1);
+            this.ribbonPageGroup10.ItemLinks.Add(this.barStaticItem2);
+            this.ribbonPageGroup10.ItemLinks.Add(this.barEditItemTimeToLogOff);
             this.ribbonPageGroup10.Name = "ribbonPageGroup10";
             this.ribbonPageGroup10.ShowCaptionButton = false;
             // 
@@ -483,6 +664,47 @@
             this.ribbonPageGroup9.ItemLinks.Add(this.btnDeactiveUser);
             this.ribbonPageGroup9.Name = "ribbonPageGroup9";
             this.ribbonPageGroup9.ShowCaptionButton = false;
+            // 
+            // ribbonPage3
+            // 
+            this.ribbonPage3.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup11,
+            this.ribbonPageGroup12,
+            this.ribbonPageGroup_Permission,
+            this.ribbonPageGroup14});
+            this.ribbonPage3.Name = "ribbonPage3";
+            this.ribbonPage3.Text = "Quản lý account MS SQL";
+            // 
+            // ribbonPageGroup11
+            // 
+            this.ribbonPageGroup11.ItemLinks.Add(this.barEditItemSQLUsername);
+            this.ribbonPageGroup11.ItemLinks.Add(this.barEditItemSQLUserMin);
+            this.ribbonPageGroup11.ItemLinks.Add(this.barEditItemSQLUserMax);
+            this.ribbonPageGroup11.Name = "ribbonPageGroup11";
+            this.ribbonPageGroup11.ShowCaptionButton = false;
+            this.ribbonPageGroup11.Text = "Đặt tên Account";
+            // 
+            // ribbonPageGroup12
+            // 
+            this.ribbonPageGroup12.ItemLinks.Add(this.btnThemUserMSSQL);
+            this.ribbonPageGroup12.ItemLinks.Add(this.btnXoaUserMSSQL);
+            this.ribbonPageGroup12.Name = "ribbonPageGroup12";
+            this.ribbonPageGroup12.ShowCaptionButton = false;
+            // 
+            // ribbonPageGroup_Permission
+            // 
+            this.ribbonPageGroup_Permission.ItemLinks.Add(this.barStaticItem3);
+            this.ribbonPageGroup_Permission.ItemLinks.Add(this.barCbb_ServerRole);
+            this.ribbonPageGroup_Permission.Name = "ribbonPageGroup_Permission";
+            this.ribbonPageGroup_Permission.ShowCaptionButton = false;
+            // 
+            // ribbonPageGroup14
+            // 
+            this.ribbonPageGroup14.ItemLinks.Add(this.btn_GrantPermission);
+            this.ribbonPageGroup14.ItemLinks.Add(this.btn_DenyPermission);
+            this.ribbonPageGroup14.Name = "ribbonPageGroup14";
+            this.ribbonPageGroup14.ShowCaptionButton = false;
+            this.ribbonPageGroup14.Text = "Phân quyền Account";
             // 
             // editMin
             // 
@@ -617,8 +839,10 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phần mềm quản lý Server";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit_Min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit_Max)).EndInit();
@@ -628,6 +852,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbEdit_ServerRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListSession)).EndInit();
@@ -700,6 +929,30 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup10;
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarEditItem barEditItemSQLUsername;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit6;
+        private DevExpress.XtraBars.BarEditItem barEditItemSQLUserMin;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit7;
+        private DevExpress.XtraBars.BarEditItem barEditItemSQLUserMax;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit8;
+        private DevExpress.XtraBars.BarButtonItem btnThemUserMSSQL;
+        private DevExpress.XtraBars.BarButtonItem btnXoaUserMSSQL;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup11;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup12;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup_Permission;
+        private DevExpress.XtraBars.BarEditItem barCbb_ServerRole;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbbEdit_ServerRole;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem3;
+        private DevExpress.XtraBars.BarEditItem barEditItem3;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraBars.BarEditItem barEditItem4;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
+        private DevExpress.XtraBars.BarButtonItem btn_GrantPermission;
+        private DevExpress.XtraBars.BarButtonItem btn_DenyPermission;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup14;
     }
 }
 

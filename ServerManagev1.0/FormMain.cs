@@ -13,6 +13,8 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using System.Runtime.InteropServices;
 using ServerManagev1._0.Enums;
+using DevExpress.Utils.Extensions;
+using DevExpress.XtraEditors;
 
 namespace ServerManagev1._0
 {
@@ -23,6 +25,7 @@ namespace ServerManagev1._0
         List<Session> listSessions;
         List<Drive> listDrive;
         ProcessDisconnectSessions PDCSS;
+        ProcessMSSQL processMSSQL;
 
         string partitionLabel = "";
         static readonly IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
@@ -54,7 +57,9 @@ namespace ServerManagev1._0
             LoadListSession();
             LoadListDrives();
             PDCSS = new ProcessDisconnectSessions(listSessions.ToArray(), MAXTIME);
+            processMSSQL = new ProcessMSSQL();
             barEditItemTimeToLogOff.EditValue = MAXTIME;
+            LoadComboBox_ServerRole();
         }
 
         private void btnDisconnectAllSession_ItemClick(object sender, ItemClickEventArgs e)
@@ -156,7 +161,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItem_Min.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItem_Max.EditValue.ToString(), @"^\d+$"))
                 {
-                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số (0 -> 65535)", "Thông báo");
+                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
                     return;
                 }
                 min = Int32.Parse(barEditItem_Min.EditValue.ToString());
@@ -216,7 +221,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItem_Min.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItem_Max.EditValue.ToString(), @"^\d+$"))
                 {
-                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số (0 -> 65535)", "Thông báo");
+                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
                     return;
                 }
                 min = Int32.Parse(barEditItem_Min.EditValue.ToString());
@@ -276,7 +281,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số (0 -> 65535)", "Thông báo");
+                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -329,7 +334,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số (0 -> 65535)", "Thông báo");
+                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -382,7 +387,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số (0 -> 65535)", "Thông báo");
+                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -435,7 +440,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số (0 -> 65535)", "Thông báo");
+                    MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -517,6 +522,284 @@ namespace ServerManagev1._0
             {
                 MAXTIME = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
                 PDCSS.MaxTime = MAXTIME;
+            }
+        }
+
+        private void btnThemUserMSSQL_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int max, min, result;
+
+            if (barEditItemSQLUsername.EditValue != null)
+            {
+                if (barEditItemSQLUserMin.EditValue.ToString().Trim() != "" && barEditItemSQLUserMax.EditValue.ToString().Trim() != "")
+                {
+                    if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
+                    {
+                        MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
+                        return;
+                    }
+                    min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
+                    max = Int32.Parse(barEditItemSQLUserMax.EditValue.ToString());
+                }
+                else
+                {
+                    min = 0;
+                    max = 0;
+                }
+
+                if (min == 0 && max == 0)
+                {
+                    string username = barEditItemSQLUsername.EditValue.ToString();
+                    string password = barEditItemSQLUsername.EditValue.ToString();
+                    result = processMSSQL.CreateNewLogin(username, password);
+
+                    if (result == 0 || result == -1)
+                    {
+                        MessageBox.Show("Thất bại!", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thành công!", "Thông báo");
+                    }
+                }
+                else
+                {
+                    for (int i = min; i <= max; i++)
+                    {
+                        string username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
+                        string password = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
+
+                        result = processMSSQL.CreateNewLogin(username, password);
+
+                        if (result == 0 || result == -1)
+                        {
+                            MessageBox.Show("Thất bại!", "Thông báo");
+                            return;
+                        }
+                    }
+                    MessageBox.Show("Thành công!", "Thông báo");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn tạo mới!", "Thông báo");
+            }
+        }
+
+        private void btnXoaUserMSSQL_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int max, min, result;
+
+            if (barEditItemSQLUsername.EditValue != null)
+            {
+                if (barEditItemSQLUserMin.EditValue.ToString().Trim() != "" && barEditItemSQLUserMax.EditValue.ToString().Trim() != "")
+                {
+                    if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
+                    {
+                        MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
+                        return;
+                    }
+                    min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
+                    max = Int32.Parse(barEditItemSQLUserMax.EditValue.ToString());
+                }
+                else
+                {
+                    min = 0;
+                    max = 0;
+                }
+
+                if (min == 0 && max == 0)
+                {
+                    string username = barEditItemSQLUsername.EditValue.ToString();
+                    string password = barEditItemSQLUsername.EditValue.ToString();
+                    result = processMSSQL.RemoveLogin(username, password);
+
+                    if (result == 0 || result == -1)
+                    {
+                        MessageBox.Show("Thất bại!", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thành công!", "Thông báo");
+                    }
+                }
+                else
+                {
+                    for (int i = min; i <= max; i++)
+                    {
+                        string username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
+                        string password = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
+
+                        result = processMSSQL.RemoveLogin(username, password);
+
+                        if (result == 0 || result == -1)
+                        {
+                            MessageBox.Show("Thất bại!", "Thông báo");
+                            return;
+                        }
+                    }
+                    MessageBox.Show("Thành công!", "Thông báo");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn xóa bỏ!", "Thông báo");
+            }
+        }
+
+        private void LoadComboBox_ServerRole()
+        {
+            List<string> listServerRoles = processMSSQL.LoadListServerRoles();
+            foreach(var serverRoleName in listServerRoles)
+            {
+                cbbEdit_ServerRole.Items.Add(serverRoleName);
+            }
+        }
+
+        private void barCbb_ServerRole_EditValueChanged(object sender, EventArgs e)
+        {
+            BarEditItem item = sender as BarEditItem;
+            var serverRoleName = item.EditValue.ToString();
+            ribbonPageGroup_Permission.Text = serverRoleName;
+        }
+
+        private void btn_GrantPermission_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int max, min, result;
+            string username = "", permissions = "";
+
+            if(ribbonPageGroup_Permission.Text == null || ribbonPageGroup_Permission.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("Vui lòng chọn quyền muốn cấp!", "Thông báo");
+            }
+            else
+            {
+                permissions = ribbonPageGroup_Permission.Text.Trim();
+            }
+
+            if (barEditItemSQLUsername.EditValue != null)
+            {
+                if (barEditItemSQLUserMin.EditValue.ToString().Trim() != "" && barEditItemSQLUserMax.EditValue.ToString().Trim() != "")
+                {
+                    if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
+                    {
+                        MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
+                        return;
+                    }
+                    min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
+                    max = Int32.Parse(barEditItemSQLUserMax.EditValue.ToString());
+                }
+                else
+                {
+                    min = 0;
+                    max = 0;
+                }
+
+                if (min == 0 && max == 0)
+                {
+                    username = barEditItemSQLUsername.EditValue.ToString();
+
+                    result = processMSSQL.GrantPermissionAccount(username, permissions);
+
+                    if (result == 0 || result == -1)
+                    {
+                        MessageBox.Show("Thất bại!", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thành công!", "Thông báo");
+                    }
+                }
+                else
+                {
+                    for (int i = min; i <= max; i++)
+                    {
+                        username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
+
+                        result = processMSSQL.GrantPermissionAccount(username, permissions);
+
+                        if (result == 0 || result == -1)
+                        {
+                            MessageBox.Show("Thất bại!", "Thông báo");
+                            return;
+                        }
+                    }
+                    MessageBox.Show("Thành công!", "Thông báo");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn cấp quyền!", "Thông báo");
+            }
+        }
+
+        private void btn_DenyPermission_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int max, min, result;
+            string username = "", permissions = "";
+
+            if (ribbonPageGroup_Permission.Text == null || ribbonPageGroup_Permission.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("Vui lòng chọn quyền muốn cấp!", "Thông báo");
+            }
+            else
+            {
+                permissions = ribbonPageGroup_Permission.Text.Trim();
+            }
+
+            if (barEditItemSQLUsername.EditValue != null)
+            {
+                if (barEditItemSQLUserMin.EditValue.ToString().Trim() != "" && barEditItemSQLUserMax.EditValue.ToString().Trim() != "")
+                {
+                    if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
+                    {
+                        MessageBox.Show("Bạn đã nhập sai định dạng min, max.\n\rChỉ được nhập số tự nhiên", "Thông báo");
+                        return;
+                    }
+                    min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
+                    max = Int32.Parse(barEditItemSQLUserMax.EditValue.ToString());
+                }
+                else
+                {
+                    min = 0;
+                    max = 0;
+                }
+
+                if (min == 0 && max == 0)
+                {
+                    username = barEditItemSQLUsername.EditValue.ToString();
+
+                    result = processMSSQL.DenyPermissionAccount(username, permissions);
+
+                    if (result == 0 || result == -1)
+                    {
+                        MessageBox.Show("Thất bại!", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thành công!", "Thông báo");
+                    }
+                }
+                else
+                {
+                    for (int i = min; i <= max; i++)
+                    {
+                        username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
+
+                        result = processMSSQL.DenyPermissionAccount(username, permissions);
+
+                        if (result == 0 || result == -1)
+                        {
+                            MessageBox.Show("Thất bại!", "Thông báo");
+                            return;
+                        }
+                    }
+                    MessageBox.Show("Thành công!", "Thông báo");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn cấp quyền!", "Thông báo");
             }
         }
     }

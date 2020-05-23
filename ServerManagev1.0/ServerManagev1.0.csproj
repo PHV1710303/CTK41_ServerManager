@@ -95,6 +95,7 @@
     <Compile Include="DisconnectSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProcessMSSQL.cs" />
     <Compile Include="RunCmd.cs" />
     <Compile Include="Session.cs" />
     <EmbeddedResource Include="FormMain.resx">
