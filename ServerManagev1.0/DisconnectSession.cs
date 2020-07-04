@@ -9,6 +9,7 @@ namespace ServerManagev1._0
     class DisconnectSession
     {
         public int SessionID { get; set; }
+        public string UserName { get; set; }
         public int TimeHasDisconnected { get; set; }
 
         public DisconnectSession()
@@ -16,9 +17,10 @@ namespace ServerManagev1._0
 
         }
 
-        public DisconnectSession(int sessionID, int timeHasDisconnected)
+        public DisconnectSession(int sessionID, string userName, int timeHasDisconnected)
         {
             SessionID = sessionID;
+            UserName = userName;
             TimeHasDisconnected = timeHasDisconnected;
         }
     }

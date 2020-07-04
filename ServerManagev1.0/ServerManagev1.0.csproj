@@ -61,6 +61,7 @@
     <Reference Include="DevExpress.Data.v19.1" />
     <Reference Include="DevExpress.Printing.v19.1.Core" />
     <Reference Include="DevExpress.Utils.v19.1" />
+    <Reference Include="DevExpress.Xpo.v19.1, Version=19.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v19.1" />
     <Reference Include="DevExpress.Sparkline.v19.1.Core" />
     <Reference Include="DevExpress.XtraEditors.v19.1" />
@@ -84,12 +85,25 @@
     <Compile Include="Enums\WTS_CONNECTSTATE_CLASS.cs" />
     <Compile Include="Enums\WTS_INFO_CLASS.cs" />
     <Compile Include="FileFoldersUtilities.cs" />
-    <Compile Include="FormMain.cs">
+    <Compile Include="Forms\FormFilterLogoffUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
+    <Compile Include="Forms\FormFilterLogoffUsers.Designer.cs">
+      <DependentUpon>FormFilterLogoffUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLog.Designer.cs">
+      <DependentUpon>FormLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logging.cs" />
     <Compile Include="ProcessDisconnectSessions.cs" />
     <Compile Include="ListSession.cs" />
     <Compile Include="DisconnectSession.cs" />
@@ -98,7 +112,13 @@
     <Compile Include="ProcessMSSQL.cs" />
     <Compile Include="RunCmd.cs" />
     <Compile Include="Session.cs" />
-    <EmbeddedResource Include="FormMain.resx">
+    <EmbeddedResource Include="Forms\FormFilterLogoffUsers.resx">
+      <DependentUpon>FormFilterLogoffUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLog.resx">
+      <DependentUpon>FormLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />

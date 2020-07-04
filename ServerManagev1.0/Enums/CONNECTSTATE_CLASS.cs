@@ -17,6 +17,7 @@ namespace ServerManagev1._0.Enums
         Listen,
         Reset,
         Down,
-        Init
+        Init,
+        None
     }
 }

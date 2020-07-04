@@ -13,83 +13,130 @@ namespace ServerManagev1._0
     {
         private const int bytes = 1048576; //1MB
 
-        public static bool LogOff(int sessionID)
+        public static String LogOff(int sessionID)
         {
-            return executeCommand("logoff", sessionID.ToString());
+            return execCommand("logoff", sessionID.ToString());
         }
 
-        public static String createUser(String username, String password)
+        public static bool createUser(String username, String password)
         {
-            // NET USER %% A %% A / ADD
-            //  net localgroup "Remote Desktop Users" %% A / add
+            string result = null;
 
-            //executeCommand("NET USER " + username + " " + username + "// ADD", "");
-            //The command completed successfully.
+            if(execCommand("net", "user " + username + " " + password + " /add",ref result) == false)
+            {
+                Logging.WriteLog(result, "Tạo mới thất bại User: " + username);
+                return false;
+            }
+            Logging.WriteLog(result, "Tạo mới User: " + username);
 
-            //String para = "user "+ 2 + 2 + " /add";
+            if(execCommand("net", "localgroup " + @"""Remote Desktop Users""" + " " + username + " /add", ref result) == false)
+            {
+                Logging.WriteLog(result, "Thêm thất bại User " + username + " vào nhóm \"Remote Desktop Users\"");
+                return false;
+            }
+            Logging.WriteLog(result, "Thêm User " + username + " vào nhóm \"Remote Desktop Users\"");
 
-            string result = "";
-
-            result += execCommand("net", "user " + username + " " + password + " /add");
-
-            result += execCommand("net", "localgroup " + @"""Remote Desktop Users""" + " " + username + " /add");
-
-            return result;
+            return true;
 
         }
 
-        public static String deleteUser(String username)
+        public static bool deleteUser(String username)
         {
-            return execCommand("net", "user " + username + " /delete");
+            string result = null;
+            if(execCommand("net", "user " + username + " /delete",ref result) == false)
+            {
+                Logging.WriteLog(result, "Xóa bỏ thất bại User: " + username);
+                return false;
+            }
+            Logging.WriteLog(result, "Xóa bỏ User: " + username);
+
+            return true;
         }
 
-        public static String activeUser(String username)
+        public static bool activeUser(String username)
         {
-            string result = "";
+            string result = null;
 
-            result += execCommand("cmd.exe", "/C net user " + username + " /active:yes");
+            if (execCommand("cmd.exe", "/C net user " + username + " /active:yes", ref result) == false)
+            {
+                Logging.WriteLog(result, "Kích hoạt thất bại User: " + username);
+                return false;
+            }
+            Logging.WriteLog(result, "Kích hoạt User: " + username);
 
             //Change password logon
             //net user username /logonpasswordchg:no
-            result += execCommand("cmd.exe", "/C net user " + username + " /logonpasswordchg:no");
+            if(execCommand("cmd.exe", "/C net user " + username + " /logonpasswordchg:no", ref result) == false)
+            {
+                return false;
+            }
 
             // change password
             // Net user username / Passwordchg:No
-            result += execCommand("cmd.exe", "/C net user " + username + " /Passwordchg:No");
+            if(execCommand("cmd.exe", "/C net user " + username + " /Passwordchg:No", ref result) == false)
+            {
+                Logging.WriteLog(result, "Hủy quyền đổi mật khẩu thất bại User: " + username);
+                return false;
+            }
+            Logging.WriteLog(result, "Hủy quyền đổi mật khẩu của User: " + username);
 
             //wmic UserAccount where name = 'John Doe' set Passwordexpires = true
             //execCommand("wmic", "UserAccount where name = '" + username + "' set Passwordexpires = no");
 
-            return result;
+            return true;
         }
 
-        public static String deactiveUser(String username)
+        public static bool deactiveUser(String username)
         {
-            execCommand("cmd.exe", "/C net user " + username + " /active:no");
+            string result = null;
+            if(execCommand("cmd.exe", "/C net user " + username + " /active:no", ref result) == false)
+            {
+                Logging.WriteLog(result, "Hủy kích hoạt thất bại User: " + username);
+                return false;
+            }
+            Logging.WriteLog(result, "Hủy kích hoạt User: " + username);
 
-            //Change password logon
+            //Change password after next login
             //net user username /logonpasswordchg:no
-            execCommand("cmd.exe", "/C net user " + username + " /logonpasswordchg:yes");
+            if (execCommand("cmd.exe", "/C net user " + username + " /logonpasswordchg:yes", ref result) == false)
+            {
+
+            }
 
             // change password
             // Net user username / Passwordchg:No
-            execCommand("cmd.exe", "/C net user " + username + " /Passwordchg:yes");
+            if (execCommand("cmd.exe", "/C net user " + username + " /Passwordchg:yes", ref result) == false)
+            {
+                Logging.WriteLog(result, "Cho phép thay đổi mật khẩu thất bại User: " + username);
+                return false;
+            }
+            Logging.WriteLog(result, "Cho phép thay đổi mật khẩu User: " + username);
 
-            return username + ": The command completed successfully.";
+            return true;
         }
 
-        public static String createFolder(String username, String partition)
+        public static bool createFolder(String username, String partition)
         {
-            //mkdir %dir%:\%%A
             //cacls % dir %:\%% A / e / p %% A:f
+            string result = null;
 
-            execCommand("cmd.exe", "/c mkdir " + partition + @":\" + username);
-            //execCommand("mkdir D:\\100", "");
+            // Lệnh tạo folder mới tương ứng với tên user
+            if (execCommand("cmd.exe", "/c mkdir " + partition + @":\" + username, ref result) == false)
+            {
+                Logging.WriteLog(result, "Tạo thất bại folder tên [" + username + "] tại phân vùng " + partition);
+                return false;
+            }
+            Logging.WriteLog(result, "Tạo folder mới tên [" + username + "] tại phân vùng " + partition);
 
-            execCommand("cmd.exe", "/c cacls " + partition + @":\" + username + " /e /p " + username + ":f");
-            //execCommand("cacls", @"D:\1 /e /p 1:f");
+            // Lệnh cấp full quyền folder cho user tương ứng
+            if (execCommand("cmd.exe", "/c cacls " + partition + @":\" + username + " /e /p " + username + ":f", ref result) == false)
+            {
+                Logging.WriteLog(result, "Cấp quyền thất bại folder [" + partition + @":\" + username + "] cho User " + username);
+                return false;
+            }
+            Logging.WriteLog(result, "Cấp quyền full quyền folder [" + partition + @":\" + username + "] cho User " + username);
 
-            return username + ": The command completed successfully.";
+            return true;
         }
 
         public static String createFolder(String username, String partition, String userGrant)
@@ -107,14 +154,20 @@ namespace ServerManagev1._0
         }
 
         // chua chay
-        public static String removeFolder(String username, String partition)
+        public static bool removeFolder(String username, String partition)
         {
             //@RD /S /Q %dir%:\%%A
             //rmdir "%%p" /s /q
+            string result = null;
 
-            String kq = execCommand("cmd.exe", "/c rmdir " + partition + @":\" + username + " /s /q");
-
-            return username + ": The command completed successfully.";
+            if(execCommand("cmd.exe", "/c rmdir " + partition + @":\" + username + " /s /q",ref result) == false)
+            {
+                Logging.WriteLog(result, "Xóa thất bại folder tên [" + username + "] tại phân vùng " + partition);
+                return false;
+            }
+            Logging.WriteLog(result, "Xóa folder tên [" + username + "] tại phân vùng " + partition);
+            
+            return true;
         }
 
         public static String addPermissionFolder(String username, String partition)
@@ -162,7 +215,6 @@ namespace ServerManagev1._0
         {
             StreamReader outputReader = null;
             StreamReader errorReader = null;
-
             String result = "";
 
             try
@@ -220,14 +272,15 @@ namespace ServerManagev1._0
             }
         }
 
-        private static bool executeCommand(String filename, string arguments)
+        private static bool execCommand(String filename, string arguments, ref string result)
         {
             StreamReader outputReader = null;
             StreamReader errorReader = null;
+            result = "";
+            string error = "", successful = "";
 
             try
             {
-                //Create Process Start information
                 //Create Process Start information
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.ErrorDialog = false;
@@ -253,17 +306,33 @@ namespace ServerManagev1._0
                     errorReader = process.StandardError;
                     process.WaitForExit();
 
-                    //read the result
-
-                    //MessageBox.Show(outputReader.ReadToEnd());
-
-                    //Display the result
-
+                    //Đọc log thành công
+                    successful = outputReader.ReadToEnd();
+                    // Đọc log báo lỗi (thất bại)
+                    error = errorReader.ReadToEnd();
+                    if(successful != "")
+                    {
+                        // Nếu thành công, successful sẽ khác rỗng
+                        result = successful;
+                        return true;
+                    }
+                    else if(error != "")
+                    {
+                        // Nếu thất bại, error sẽ khác rỗng
+                        result = error;
+                        return false;
+                    }
+                    // Nếu cả hai trường hợp đề không xảy ra, có thể là thành công. Do một vài trường hợp thành công, cmd không báo log
+                    return true;
                 }
-                return true;
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
+                result = ex.Message;
                 MessageBox.Show(ex.Message);
                 return false;
             }

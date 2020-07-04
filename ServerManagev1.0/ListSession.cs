@@ -67,6 +67,8 @@ namespace ServerManagev1._0
         {
             WTSCloseServer(ServerHandle);
         }
+
+        // Phương thức lấy danh sách các phiên đang hoạt động
         public static List<Session> ListUsers(String ServerName)
         {
             IntPtr serverHandle = IntPtr.Zero;
@@ -124,7 +126,47 @@ namespace ServerManagev1._0
             {
                 CloseServer(serverHandle);
             }
+        }
 
+        // Phương thức kiểm tra sự thay đổi của các phiên để tiến hành ghi log.
+        public static void CheckSessionsChange(List<Session> oldSessions, List<Session> newSessions)
+        {
+            // Tiến hành ghi log khi có user mới connect đến server
+            string name;
+            CONNECTSTATE_CLASS connectState;
+            for (int i = 0; i < newSessions.Count; i++)
+            {
+                try
+                {
+                    name = oldSessions[i].userName;
+                    connectState = oldSessions[i].connectedState;
+                }
+                catch
+                {
+                    connectState = CONNECTSTATE_CLASS.None;
+                    name = "";
+                }
+                // Kiểm tra xem có user mới connect không
+                if (newSessions[i].userName != name)
+                {
+                    Logging.WriteLogSessions("User " + newSessions[i].userName + " kết nối vào máy chủ", "Connect");
+                }
+                // Kiểm tra xem có user mới disconnect hay reconnect không
+                else
+                {
+                    if(newSessions[i].connectedState != connectState) // Nếu có sự thay đổi về trạng thái truy cập thì xét tiếp, không thì thôi :v
+                    {
+                        if(newSessions[i].connectedState == CONNECTSTATE_CLASS.Active && connectState == CONNECTSTATE_CLASS.Disconnected)
+                        {
+                            Logging.WriteLogSessions("User " + name + " kết nối lại vào máy chủ", "Reconnect");
+                        }
+                        else if(newSessions[i].connectedState == CONNECTSTATE_CLASS.Disconnected && connectState == CONNECTSTATE_CLASS.Active)
+                        {
+                            Logging.WriteLogSessions("User " + name + " rời khỏi máy chủ", "Disconnect");
+                        }
+                    }
+                }
+            }
         }
     }
 }
