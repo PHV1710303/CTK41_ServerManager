@@ -23,6 +23,7 @@ namespace ServerManagev1._0
     {
         int INTERVAL = 5000; // 5000 mili giây. Mỗi chu kỳ của timer là 5 giây.
         int MAXTIME = 300; // 300 giây. Sau số thời gian này, những User nào đang ở trạng thái disconnect sẽ bị log off. Tránh tốn tài nguyên của máy chủ Server.
+        int flagToNotification = 0;
         List<Session> listSessions;
         List<Drive> listDrive;
         ProcessDisconnectSessions PDCSS;
@@ -34,6 +35,28 @@ namespace ServerManagev1._0
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        void ShowNotification(string notification, bool isError)
+        {
+            if (isError)
+            {
+                lbl_Notification.ForeColor = Color.DarkRed;
+            }
+            else
+            {
+                lbl_Notification.ForeColor = Color.DarkGreen;
+            }
+            lbl_Notification.Visible = true;
+            lbl_Notification.Text = notification;
+            flagToNotification = 3;
+        }
+
+        private void btnReload_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int index = gridView1.FocusedRowHandle;
+            LoadListSession(true);
+            gridView1.FocusedRowHandle = index;
         }
 
         public void LoadListSession(bool isCheck)
@@ -105,13 +128,11 @@ namespace ServerManagev1._0
             }
             if(numError == 0)
             {
-                lbl_Notification.ForeColor = Color.DarkGreen;
-                lbl_Notification.Text = "Xong";
+                ShowNotification("Xong", false);
             }
             else
             {
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Thất bại " + numError + " Users";
+                ShowNotification("Thất bại", true);
             }
             LoadListSession(false);
             timerSession.Enabled = true;
@@ -128,15 +149,13 @@ namespace ServerManagev1._0
             if (result)
             {
                 Logging.WriteLogSessions("User " + userName + " đã bị ngắt kết nối bởi Admin", "Manual Disconnect");
-                lbl_Notification.ForeColor = Color.DarkGreen;
-                lbl_Notification.Text = "Thành công";
+                ShowNotification("Thành công", false);
                 LoadListSession(false);
             }
             else
             {
                 Logging.WriteLogSessions("User " + userName + " đã bị ngắt kết nối thất bại bởi Admin", "Manual Disconnect");
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Thất bại";
+                ShowNotification("Thất bại", true);
             }
         }
 
@@ -174,13 +193,11 @@ namespace ServerManagev1._0
             }
             if (numError == 0)
             {
-                lbl_Notification.ForeColor = Color.DarkGreen;
-                lbl_Notification.Text = "Xong";
+                ShowNotification("Xong", false);
             }
             else
             {
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Thất bại " + numError + " Users";
+                ShowNotification("Thất bại " + numError + " Users", false);
             }
             LoadListSession(false);
             timerSession.Enabled = true;
@@ -198,29 +215,30 @@ namespace ServerManagev1._0
             if (result)
             {
                 Logging.WriteLogSessions("User " + userName + " đã bị tắt bởi Admin", "Manual Logoff");
-                lbl_Notification.ForeColor = Color.DarkGreen;
-                lbl_Notification.Text = "Thành công";
+                ShowNotification("Thành công", false);
                 LoadListSession(false);
             }
             else
             {
                 Logging.WriteLogSessions("User " + userName + " đã bị tắt thất bại bởi Admin", "Manual Logoff");
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Thất bại";
+                ShowNotification("Thất bại", true);
             }
-        }
-
-        private void btnReload_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            int index = gridView1.FocusedRowHandle;
-            LoadListSession(true);
-            gridView1.FocusedRowHandle = index;
         }
 
         private void timerSession_Tick(object sender, EventArgs e)
         {
             btnReload.PerformClick();
             PDCSS.UpdateTimeDisconnection(listSessions.ToArray(), INTERVAL / 1000);
+            if (flagToNotification > 1)
+            {
+                flagToNotification--;
+            }
+            if(flagToNotification == 1)
+            {
+                lbl_Notification.Text = "";
+                lbl_Notification.Visible = false;
+                flagToNotification = 0;
+            }
         }
 
         private void cmnu_Disconnect_Click(object sender, EventArgs e)
@@ -247,8 +265,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItem_Min.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItem_Max.EditValue.ToString(), @"^\d+$"))
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên";
+                    ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                     return;
                 }
                 min = Int32.Parse(barEditItem_Min.EditValue.ToString());
@@ -262,8 +279,7 @@ namespace ServerManagev1._0
 
             if (partitionLabel.Equals(null) || partitionLabel.Equals(""))
             {
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Vui lòng chọn phân vùng muốn tạo folder mới";
+                ShowNotification("Vui lòng chọn phân vùng muốn tạo folder mới", true);
                 return;
             }
             else
@@ -275,19 +291,16 @@ namespace ServerManagev1._0
                         name = barEditItemFolderName.EditValue.ToString();
                         if(RunCmd.createFolder(name, partitionLabel))
                         {
-                            lbl_Notification.ForeColor = Color.DarkGreen;
-                            lbl_Notification.Text = "Thành công";
+                            ShowNotification("Thành công", false);
                         }
                         else
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Thất bại";
+                            ShowNotification("Thất bại", true);
                         }
                     }
                     catch
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Vui lòng nhập tên folder muốn tạo mới";
+                        ShowNotification("Vui lòng nhập tên folder muốn tạo mới", true);
                         return;
                     }
                 }
@@ -305,21 +318,18 @@ namespace ServerManagev1._0
                         }
                         catch (Exception)
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Vui lòng nhập tên folder muốn tạo mới";
+                            ShowNotification("Vui lòng nhập tên folder muốn tạo mới", true);
                             break;
                         }
                         if (i >= max)
                         {
                             if (numError != 0)
                             {
-                                lbl_Notification.ForeColor = Color.DarkRed;
-                                lbl_Notification.Text = "Thất bại " + numError + " folders";
+                                ShowNotification("Thất bại " + numError + " folders", true);
                             }
                             else
                             {
-                                lbl_Notification.ForeColor = Color.DarkGreen;
-                                lbl_Notification.Text = "Thành công";
+                                ShowNotification("Thành công", false);
                             }
                         }
                     }
@@ -336,8 +346,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItem_Min.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItem_Max.EditValue.ToString(), @"^\d+$"))
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên";
+                    ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                     return;
                 }
                 min = Int32.Parse(barEditItem_Min.EditValue.ToString());
@@ -351,8 +360,7 @@ namespace ServerManagev1._0
 
             if (partitionLabel.Equals(null) || partitionLabel.Equals(""))
             {
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Vui lòng chọn phân vùng muốn xóa folder";
+                ShowNotification("Vui lòng chọn phân vùng muốn xóa folder", true);
                 return;
             }
             else
@@ -364,19 +372,16 @@ namespace ServerManagev1._0
                         name = barEditItemFolderName.EditValue.ToString();
                         if(RunCmd.removeFolder(name, partitionLabel))
                         {
-                            lbl_Notification.ForeColor = Color.DarkGreen;
-                            lbl_Notification.Text = "Thành công";
+                            ShowNotification("Thành công", false);
                         }
                         else
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Thất bại";
+                            ShowNotification("Thất bại", true);
                         }
                     }
                     catch
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Vui lòng nhập tên folder muốn xóa bỏ";
+                        ShowNotification("Vui lòng nhập tên folder muốn xóa bỏ", true);
                         return;
                     }
                 }
@@ -394,21 +399,20 @@ namespace ServerManagev1._0
                         }
                         catch (Exception)
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Vui lòng nhập tên folder muốn tạo mới";
+                            ShowNotification("Vui lòng nhập tên folder muốn tạo mới", true);
                             break;
                         }
                         if (i >= max)
                         {
                             if (numError != 0)
                             {
-                                lbl_Notification.ForeColor = Color.DarkRed;
-                                lbl_Notification.Text = "Thất bại " + numError + " folders";
+                                ShowNotification("Thất bại " + numError + " folders", true);
                             }
                             else
                             {
                                 lbl_Notification.ForeColor = Color.DarkGreen;
                                 lbl_Notification.Text = "Thành công";
+                                ShowNotification("Thành công", false);
                             }
                         }
                     }
@@ -424,8 +428,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên";
+                    ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -444,19 +447,16 @@ namespace ServerManagev1._0
                     name = barEditItemUsername.EditValue.ToString();
                     if(RunCmd.activeUser(name))
                     {
-                        lbl_Notification.ForeColor = Color.DarkGreen;
-                        lbl_Notification.Text = "Thành công";
+                        ShowNotification("Thành công", false);
                     }
                     else
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Thất bại";
+                        ShowNotification("Thất bại", true);
                     }
                 }
                 catch
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Vui lòng nhập tên User muốn kích hoạt";
+                    ShowNotification("Vui lòng nhập tên User muốn kích hoạt", true);
                     return;
                 }
             }
@@ -474,21 +474,18 @@ namespace ServerManagev1._0
                     }
                     catch (Exception)
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Vui lòng nhập tên User muốn kích hoạt";
+                        ShowNotification("Vui lòng nhập tên User muốn kích hoạt", true);
                         break;
                     }
                     if (i >= max)
                     {
                         if (numError != 0)
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Thất bại " + numError + " User";
+                            ShowNotification("Thất bại " + numError + " User", true);
                         }
                         else
                         {
-                            lbl_Notification.ForeColor = Color.DarkGreen;
-                            lbl_Notification.Text = "Thành công";
+                            ShowNotification("Thành công", false);
                         }
                     }
                 }
@@ -503,8 +500,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên";
+                    ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -523,19 +519,16 @@ namespace ServerManagev1._0
                     name = barEditItemUsername.EditValue.ToString();
                     if (RunCmd.deactiveUser(name) == true)
                     {
-                        lbl_Notification.ForeColor = Color.DarkGreen;
-                        lbl_Notification.Text = "Thành công";
+                        ShowNotification("Thành công", false);
                     }
                     else
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Thất bại";
+                        ShowNotification("Thất bại", true);
                     }
                 }
                 catch
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Vui lòng nhập tên User muốn hủy kích hoạt";
+                    ShowNotification("Vui lòng nhập tên User muốn hủy kích hoạt", true);
                     return;
                 }
             }
@@ -553,21 +546,18 @@ namespace ServerManagev1._0
                     }
                     catch (Exception)
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Vui lòng nhập tên User muốn hủy kích hoạt";
+                        ShowNotification("Vui lòng nhập tên User muốn hủy kích hoạt", true);
                         break;
                     }
                     if (i >= max)
                     {
                         if (numError != 0)
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Thất bại " + numError + " User";
+                            ShowNotification("Thất bại " + numError + " User", true);
                         }
                         else
                         {
-                            lbl_Notification.ForeColor = Color.DarkGreen;
-                            lbl_Notification.Text = "Thành công";
+                            ShowNotification("Thành công", false);
                         }
                     }
                 }
@@ -582,8 +572,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên";
+                    ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -602,19 +591,16 @@ namespace ServerManagev1._0
                     name = barEditItemUsername.EditValue.ToString();
                     if(RunCmd.createUser(name, name))
                     {
-                        lbl_Notification.ForeColor = Color.DarkGreen;
-                        lbl_Notification.Text = "Thành công";
+                        ShowNotification("Thành công", false);
                     }
                     else
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Thất bại";
+                        ShowNotification("Thất bại", true);
                     }
                 }
                 catch
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Vui lòng nhập tên User muốn thêm";
+                    ShowNotification("Vui lòng nhập tên User muốn thêm", true);
                     return;
                 }
             }
@@ -632,21 +618,18 @@ namespace ServerManagev1._0
                     }
                     catch (Exception)
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Vui lòng nhập tên User muốn thêm";
+                        ShowNotification("Vui lòng nhập tên User muốn thêm", true);
                         break;
                     }
                     if (i >= max)
                     {
                         if (numError != 0)
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Thất bại " + numError + " User";
+                            ShowNotification("Thất bại " + numError + " User", true);
                         }
                         else
                         {
-                            lbl_Notification.ForeColor = Color.DarkGreen;
-                            lbl_Notification.Text = "Thành công";
+                            ShowNotification("Thành công", false);
                         }
                     }
                 }
@@ -661,8 +644,7 @@ namespace ServerManagev1._0
             {
                 if (!Regex.IsMatch(barEditItemUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemUserMax.EditValue.ToString(), @"^\d+$"))
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên";
+                    ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                     return;
                 }
                 min = Int32.Parse(barEditItemUserMin.EditValue.ToString());
@@ -681,19 +663,16 @@ namespace ServerManagev1._0
                     name = barEditItemUsername.EditValue.ToString();
                     if(RunCmd.deleteUser(name))
                     {
-                        lbl_Notification.ForeColor = Color.DarkGreen;
-                        lbl_Notification.Text = "Thành công";
+                        ShowNotification("Thành công", false);
                     }
                     else
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Thất bại";
+                        ShowNotification("Thất bại", true);
                     }
                 }
                 catch
                 {
-                    lbl_Notification.ForeColor = Color.DarkRed;
-                    lbl_Notification.Text = "Vui lòng nhập tên User muốn xóa";
+                    ShowNotification("Vui lòng nhập tên User muốn xóa", true);
                     return;
                 }
             }
@@ -711,21 +690,18 @@ namespace ServerManagev1._0
                     }
                     catch (Exception)
                     {
-                        lbl_Notification.ForeColor = Color.DarkRed;
-                        lbl_Notification.Text = "Vui lòng nhập tên User muốn xóa";
+                        ShowNotification("Vui lòng nhập tên User muốn xóa", true);
                         break;
                     }
                     if (i >= max)
                     {
                         if (numError != 0)
                         {
-                            lbl_Notification.ForeColor = Color.DarkRed;
-                            lbl_Notification.Text = "Thất bại " + numError + " User";
+                            ShowNotification("Thất bại " + numError + " User", true);
                         }
                         else
                         {
-                            lbl_Notification.ForeColor = Color.DarkGreen;
-                            lbl_Notification.Text = "Thành công";
+                            ShowNotification("Thành công", false);
                         }
                     }
                 }
@@ -739,13 +715,11 @@ namespace ServerManagev1._0
 
             if(RunCmd.deleteUser(userName))
             {
-                lbl_Notification.ForeColor = Color.DarkGreen;
-                lbl_Notification.Text = "Thành công";
+                ShowNotification("Thành công", false);
             }
             else
             {
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Thất bại";
+                ShowNotification("Thất bại", true);
             }
         }
 
@@ -756,13 +730,11 @@ namespace ServerManagev1._0
 
             if(RunCmd.activeUser(userName))
             {
-                lbl_Notification.ForeColor = Color.DarkGreen;
-                lbl_Notification.Text = "Thành công";
+                ShowNotification("Thành công", false);
             }
             else
             {
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Thất bại";
+                ShowNotification("Thất bại", true);
             }
         }
 
@@ -773,13 +745,11 @@ namespace ServerManagev1._0
 
             if(RunCmd.deactiveUser(userName))
             {
-                lbl_Notification.ForeColor = Color.DarkGreen;
-                lbl_Notification.Text = "Thành công";
+                ShowNotification("Thành công", false);
             }
             else
             {
-                lbl_Notification.ForeColor = Color.DarkRed;
-                lbl_Notification.Text = "Thất bại";
+                ShowNotification("Thất bại", true);
             }
         }
 
@@ -787,7 +757,7 @@ namespace ServerManagev1._0
         {
             if(!Regex.IsMatch(barEditItemTimeToLogOff.EditValue.ToString(), @"^\d+$"))
             {
-                MessageBox.Show("Thời gian (giây) phải là số tự nhiên lớn hơn 0. Không được chứa chữ cái hay ký tự!!", "Thông báo");
+                ShowNotification("Thời gian (giây) phải là số tự nhiên lớn hơn 0. Không được chứa chữ cái hay ký tự!!", true);
                 barEditItemTimeToLogOff.EditValue = MAXTIME;
             }
             else

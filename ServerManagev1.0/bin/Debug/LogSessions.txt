@@ -1,22 +1,5 @@
-﻿7/4/2020 11:00:55 AM || Connect           || User PC1 kết nối vào máy chủ
-7/4/2020 11:01:10 AM || Disconnect        || User PC1 rời khỏi máy chủ
-7/4/2020 11:01:25 AM || Reconnect         || User PC1 kết nối lại vào máy chủ
-7/4/2020 11:01:39 AM || Manual Disconnect || User PC1 đã bị ngắt kết nối bởi Admin
-7/4/2020 11:02:00 AM || Auto Logoff       || User PC1 bị hệ thống tự động tắt khỏi máy chủ
-7/4/2020 1:15:28 PM || Connect           || User PC1 kết nối vào máy chủ
-7/4/2020 1:16:06 PM || Manual Logoff     || User PC1 đã bị tắt bởi Admin
-7/4/2020 1:22:48 PM || Connect           || User PC1 kết nối vào máy chủ
-7/4/2020 1:23:23 PM || Disconnect        || User PC1 rời khỏi máy chủ
-7/4/2020 1:23:33 PM || Auto Logoff       || User PC1 bị hệ thống tự động tắt khỏi máy chủ
-7/4/2020 2:21:02 PM || Connect           || User PC1 kết nối vào máy chủ
-7/4/2020 2:21:27 PM || Disconnect        || User PC1 rời khỏi máy chủ
-7/4/2020 2:21:42 PM || Auto Logoff       || User PC1 bị hệ thống tự động tắt khỏi máy chủ
-7/4/2020 2:25:23 PM || Connect           || User PC1 kết nối vào máy chủ
-7/4/2020 2:25:33 PM || Disconnect        || User PC1 rời khỏi máy chủ
-7/4/2020 2:25:48 PM || Reconnect         || User PC1 kết nối lại vào máy chủ
-7/4/2020 2:25:58 PM || Disconnect        || User PC1 rời khỏi máy chủ
-7/4/2020 2:28:52 PM || Reconnect         || User PC1 kết nối lại vào máy chủ
-7/4/2020 2:31:22 PM || Disconnect        || User PC1 rời khỏi máy chủ
-7/4/2020 2:36:22 PM || Auto Logoff       || User PC1 bị hệ thống tự động tắt khỏi máy chủ
-7/4/2020 2:39:21 PM || Connect           || User PC1 kết nối vào máy chủ
-7/4/2020 2:39:41 PM || Disconnect        || User PC1 rời khỏi máy chủ
+﻿7/7/2020 9:46:38 AM || Connect           || User PC1 kết nối vào máy chủ
+7/7/2020 9:47:08 AM || Disconnect        || User PC1 rời khỏi máy chủ
+7/7/2020 9:50:08 AM || Auto Logoff       || User PC1 bị hệ thống tự động tắt khỏi máy chủ
+7/7/2020 9:56:12 AM || Manual Disconnect || User PC1 đã bị ngắt kết nối bởi Admin
+7/7/2020 9:56:15 AM || Manual Disconnect || User PC1 đã bị tắt bởi Admin

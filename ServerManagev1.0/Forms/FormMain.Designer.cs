@@ -897,6 +897,7 @@
             this.lbl_Notification.TabIndex = 4;
             this.lbl_Notification.Text = "label";
             this.lbl_Notification.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_Notification.Visible = false;
             // 
             // frmMain
             // 

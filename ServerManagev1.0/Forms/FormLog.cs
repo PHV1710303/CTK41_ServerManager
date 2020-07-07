@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using System.Diagnostics;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraBars.Docking2010.Customization;
 
 namespace ServerManagev1._0.Forms
 {

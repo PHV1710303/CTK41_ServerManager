@@ -78,7 +78,7 @@ namespace ServerManagev1._0
                 Logging.WriteLog(result, "Hủy quyền đổi mật khẩu thất bại User: " + username);
                 return false;
             }
-            Logging.WriteLog(result, "Hủy quyền đổi mật khẩu của User: " + username);
+            Logging.WriteLog(result, "Không cho phép User [" + username + "] đổi mật khẩu");
 
             //wmic UserAccount where name = 'John Doe' set Passwordexpires = true
             //execCommand("wmic", "UserAccount where name = '" + username + "' set Passwordexpires = no");
