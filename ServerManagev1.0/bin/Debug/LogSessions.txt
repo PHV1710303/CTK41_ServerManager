@@ -1,5 +1,0 @@
-﻿7/7/2020 9:46:38 AM || Connect           || User PC1 kết nối vào máy chủ
-7/7/2020 9:47:08 AM || Disconnect        || User PC1 rời khỏi máy chủ
-7/7/2020 9:50:08 AM || Auto Logoff       || User PC1 bị hệ thống tự động tắt khỏi máy chủ
-7/7/2020 9:56:12 AM || Manual Disconnect || User PC1 đã bị ngắt kết nối bởi Admin
-7/7/2020 9:56:15 AM || Manual Disconnect || User PC1 đã bị tắt bởi Admin

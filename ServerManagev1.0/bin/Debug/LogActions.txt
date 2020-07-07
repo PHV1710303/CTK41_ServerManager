@@ -1,3 +1,0 @@
-﻿7/7/2020 9:45:39 AM || Xóa thất bại folder tên [PC1] tại phân vùng E || The system cannot find the file specified.
-7/7/2020 9:45:39 AM || Xóa thất bại folder tên [PC2] tại phân vùng E || The system cannot find the file specified.
-7/7/2020 9:45:39 AM || Xóa thất bại folder tên [PC3] tại phân vùng E || The system cannot find the file specified.
