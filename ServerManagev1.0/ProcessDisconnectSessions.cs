@@ -108,10 +108,10 @@ namespace ServerManagev1._0
 
         public List<FilterLogoffUser> Load_FilterLogoffUsers()
         {
+            List_FilterUsers = new List<FilterLogoffUser>();
             FileStream fs;
             if(File.Exists(fileName))
             {
-                List_FilterUsers = new List<FilterLogoffUser>();
                 fs = new FileStream(fileName, FileMode.Open);
                 StreamReader sr = new StreamReader(fs, Encoding.UTF8);
                 string str;
@@ -124,7 +124,7 @@ namespace ServerManagev1._0
             else
             {
                 fs = new FileStream(fileName, FileMode.Create);
-                return null;
+                fs.Close();
             }
 
             return List_FilterUsers;

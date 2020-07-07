@@ -52,12 +52,11 @@ namespace ServerManagev1._0
             return _Minutes * 60 + _Seconds;
         }
 
-        void LoadTimeToLogoff(int minutes, int seconds)
+        void LoadTimeToLogoff(ref int minutes, ref int seconds)
         {
-            int _Minutes = minutes, _Seconds = seconds;
-            MAXTIME = CaclTimeToLogoff(ref _Minutes, ref _Seconds);
-            barEditItemTimeToLogOff_Minutes.EditValue = _Minutes;
-            barEditItemTimeToLogOff.EditValue = _Seconds;
+            MAXTIME = CaclTimeToLogoff(ref minutes, ref seconds);
+            barEditItemTimeToLogOff_Minutes.EditValue = minutes;
+            barEditItemTimeToLogOff.EditValue = seconds;
         }
 
         void LoadTimeToLogoff()
@@ -793,35 +792,23 @@ namespace ServerManagev1._0
                 ShowNotification("Thời gian (giây) phải là số tự nhiên lớn hơn 0. Không được chứa chữ cái hay ký tự!!", true);
                 LoadTimeToLogoff();
             }
-            //else
-            //{
-            //    MAXTIME = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
-            //    PDCSS.MaxTime = MAXTIME;
-            //}
         }
 
         private void barEditItemTimeToLogOff_Minutes_EditValueChanged(object sender, EventArgs e)
         {
-            int minutes, seconds;
             if (!Regex.IsMatch(barEditItemTimeToLogOff_Minutes.EditValue.ToString(), @"^\d+$"))
             {
                 ShowNotification("Thời gian (giây) phải là số tự nhiên lớn hơn 0. Không được chứa chữ cái hay ký tự!!", true);
                 LoadTimeToLogoff();
             }
-            //else
-            //{
-            //    minutes = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
-            //    seconds = Int32.Parse(barEditItemTimeToLogOff_Minutes.EditValue.ToString());
-            //    MAXTIME = seconds * 60 + minutes;
-            //    PDCSS.MaxTime = MAXTIME;
-            //}
         }
 
         private void btnUpdateTimeToLogoff_ItemClick(object sender, ItemClickEventArgs e)
         {
             int seconds = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
             int minutes = Int32.Parse(barEditItemTimeToLogOff_Minutes.EditValue.ToString());
-            LoadTimeToLogoff(minutes, seconds);
+            LoadTimeToLogoff(ref minutes, ref seconds);
+            Logging.WriteLog("", "Thay đổi thời gian tự động logoff thành " + minutes + " phút " + seconds + " giây");
         }
 
         private void btnThemUserMSSQL_ItemClick(object sender, ItemClickEventArgs e)

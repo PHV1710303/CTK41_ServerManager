@@ -149,7 +149,8 @@ namespace ServerManagev1._0
             }
             else
             {
-                return null;
+                fs = new FileStream(fileName, FileMode.Create);
+                fs.Close();
             }
             return result;
         }
