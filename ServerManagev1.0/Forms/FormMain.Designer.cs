@@ -61,8 +61,6 @@
             this.barEditItemTimeToLogOff = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemTextEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.barStaticItemTimeDisconnect = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barEditItemSQLUsername = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemTextEdit6 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.barEditItemSQLUserMin = new DevExpress.XtraBars.BarEditItem();
@@ -84,6 +82,9 @@
             this.btnFilterUsersLogoff = new DevExpress.XtraBars.BarButtonItem();
             this.btnViewLogSessions = new DevExpress.XtraBars.BarButtonItem();
             this.btnViewLogAction = new DevExpress.XtraBars.BarButtonItem();
+            this.barEditItemTimeToLogOff_Minutes = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.btnUpdateTimeToLogoff = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -136,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbEdit_ServerRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListSession)).BeginInit();
@@ -177,8 +179,6 @@
             this.btnDeleteUser,
             this.barEditItemTimeToLogOff,
             this.barStaticItemTimeDisconnect,
-            this.barStaticItem1,
-            this.barStaticItem2,
             this.barEditItemSQLUsername,
             this.barEditItemSQLUserMin,
             this.barEditItemSQLUserMax,
@@ -194,10 +194,12 @@
             this.btn_DenyPermission,
             this.btnFilterUsersLogoff,
             this.btnViewLogSessions,
-            this.btnViewLogAction});
+            this.btnViewLogAction,
+            this.barEditItemTimeToLogOff_Minutes,
+            this.btnUpdateTimeToLogoff});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 51;
+            this.ribbonControl1.MaxItemId = 53;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -220,8 +222,9 @@
             this.repositoryItemTextEdit7,
             this.repositoryItemTextEdit8,
             this.cbbEdit_ServerRole,
-            this.repositoryItemComboBox1});
-            this.ribbonControl1.Size = new System.Drawing.Size(1156, 178);
+            this.repositoryItemComboBox1,
+            this.repositoryItemTextEdit9});
+            this.ribbonControl1.Size = new System.Drawing.Size(1301, 178);
             this.ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
             // btnDisconnectAllSession
@@ -433,18 +436,6 @@
             this.barStaticItemTimeDisconnect.Id = 29;
             this.barStaticItemTimeDisconnect.Name = "barStaticItemTimeDisconnect";
             // 
-            // barStaticItem1
-            // 
-            this.barStaticItem1.Caption = "Thời gian tự động logoff";
-            this.barStaticItem1.Id = 30;
-            this.barStaticItem1.Name = "barStaticItem1";
-            // 
-            // barStaticItem2
-            // 
-            this.barStaticItem2.Caption = "những User đã ngắt kết nối.";
-            this.barStaticItem2.Id = 31;
-            this.barStaticItem2.Name = "barStaticItem2";
-            // 
             // barEditItemSQLUsername
             // 
             this.barEditItemSQLUsername.Caption = "Tên User";
@@ -594,6 +585,29 @@
             this.btnViewLogAction.Name = "btnViewLogAction";
             this.btnViewLogAction.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewLogAction_ItemClick);
             // 
+            // barEditItemTimeToLogOff_Minutes
+            // 
+            this.barEditItemTimeToLogOff_Minutes.Caption = "phút";
+            this.barEditItemTimeToLogOff_Minutes.CaptionAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.barEditItemTimeToLogOff_Minutes.Edit = this.repositoryItemTextEdit9;
+            this.barEditItemTimeToLogOff_Minutes.EditValue = 0;
+            this.barEditItemTimeToLogOff_Minutes.Id = 51;
+            this.barEditItemTimeToLogOff_Minutes.Name = "barEditItemTimeToLogOff_Minutes";
+            this.barEditItemTimeToLogOff_Minutes.EditValueChanged += new System.EventHandler(this.barEditItemTimeToLogOff_Minutes_EditValueChanged);
+            // 
+            // repositoryItemTextEdit9
+            // 
+            this.repositoryItemTextEdit9.AutoHeight = false;
+            this.repositoryItemTextEdit9.Name = "repositoryItemTextEdit9";
+            // 
+            // btnUpdateTimeToLogoff
+            // 
+            this.btnUpdateTimeToLogoff.Caption = "Cập nhật";
+            this.btnUpdateTimeToLogoff.Id = 52;
+            this.btnUpdateTimeToLogoff.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
+            this.btnUpdateTimeToLogoff.Name = "btnUpdateTimeToLogoff";
+            this.btnUpdateTimeToLogoff.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpdateTimeToLogoff_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -629,10 +643,10 @@
             // 
             // ribbonPageGroup10
             // 
-            this.ribbonPageGroup10.ItemLinks.Add(this.barStaticItem1);
-            this.ribbonPageGroup10.ItemLinks.Add(this.barStaticItem2);
-            this.ribbonPageGroup10.ItemLinks.Add(this.barEditItemTimeToLogOff);
             this.ribbonPageGroup10.ItemLinks.Add(this.btnFilterUsersLogoff);
+            this.ribbonPageGroup10.ItemLinks.Add(this.barEditItemTimeToLogOff_Minutes);
+            this.ribbonPageGroup10.ItemLinks.Add(this.barEditItemTimeToLogOff);
+            this.ribbonPageGroup10.ItemLinks.Add(this.btnUpdateTimeToLogoff);
             this.ribbonPageGroup10.Name = "ribbonPageGroup10";
             this.ribbonPageGroup10.ShowCaptionButton = false;
             this.ribbonPageGroup10.Text = "Tự động ngắt kết nối";
@@ -786,7 +800,7 @@
             this.gridListSession.Location = new System.Drawing.Point(0, 178);
             this.gridListSession.MainView = this.gridView1;
             this.gridListSession.Name = "gridListSession";
-            this.gridListSession.Size = new System.Drawing.Size(1156, 443);
+            this.gridListSession.Size = new System.Drawing.Size(1301, 443);
             this.gridListSession.TabIndex = 1;
             this.gridListSession.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -893,7 +907,7 @@
             this.lbl_Notification.Location = new System.Drawing.Point(0, 595);
             this.lbl_Notification.Margin = new System.Windows.Forms.Padding(5, 0, 3, 5);
             this.lbl_Notification.Name = "lbl_Notification";
-            this.lbl_Notification.Size = new System.Drawing.Size(1156, 26);
+            this.lbl_Notification.Size = new System.Drawing.Size(1301, 26);
             this.lbl_Notification.TabIndex = 4;
             this.lbl_Notification.Text = "label";
             this.lbl_Notification.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -904,7 +918,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 621);
+            this.ClientSize = new System.Drawing.Size(1301, 621);
             this.Controls.Add(this.lbl_Notification);
             this.Controls.Add(this.gridListSession);
             this.Controls.Add(this.ribbonControl1);
@@ -931,6 +945,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbEdit_ServerRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListSession)).EndInit();
@@ -1001,8 +1016,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit5;
         private DevExpress.XtraBars.BarStaticItem barStaticItemTimeDisconnect;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup10;
-        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
-        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
         private DevExpress.XtraBars.BarEditItem barEditItemSQLUsername;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit6;
         private DevExpress.XtraBars.BarEditItem barEditItemSQLUserMin;
@@ -1034,6 +1047,9 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup13;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup15;
+        private DevExpress.XtraBars.BarEditItem barEditItemTimeToLogOff_Minutes;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit9;
+        private DevExpress.XtraBars.BarButtonItem btnUpdateTimeToLogoff;
     }
 }
 

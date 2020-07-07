@@ -22,7 +22,7 @@ namespace ServerManagev1._0
     public partial class frmMain : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         int INTERVAL = 5000; // 5000 mili giây. Mỗi chu kỳ của timer là 5 giây.
-        int MAXTIME = 300; // 300 giây. Sau số thời gian này, những User nào đang ở trạng thái disconnect sẽ bị log off. Tránh tốn tài nguyên của máy chủ Server.
+        int MAXTIME = 900; // 300 giây. Sau số thời gian này, những User nào đang ở trạng thái disconnect sẽ bị log off. Tránh tốn tài nguyên của máy chủ Server.
         int flagToNotification = 0;
         List<Session> listSessions;
         List<Drive> listDrive;
@@ -35,6 +35,37 @@ namespace ServerManagev1._0
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        int CaclTimeToLogoff(ref int minutes, ref int seconds)
+        {
+            if(minutes <= 0 && seconds <=0)
+            {
+                return 0;
+            }
+            int _Minutes, _Seconds;
+            _Minutes = seconds / 60;
+            _Minutes += minutes;
+            _Seconds = seconds % 60;
+            minutes = _Minutes;
+            seconds = _Seconds;
+            return _Minutes * 60 + _Seconds;
+        }
+
+        void LoadTimeToLogoff(int minutes, int seconds)
+        {
+            int _Minutes = minutes, _Seconds = seconds;
+            MAXTIME = CaclTimeToLogoff(ref _Minutes, ref _Seconds);
+            barEditItemTimeToLogOff_Minutes.EditValue = _Minutes;
+            barEditItemTimeToLogOff.EditValue = _Seconds;
+        }
+
+        void LoadTimeToLogoff()
+        {
+            int minutes = 0, seconds = MAXTIME;
+            CaclTimeToLogoff(ref minutes, ref seconds);
+            barEditItemTimeToLogOff_Minutes.EditValue = minutes;
+            barEditItemTimeToLogOff.EditValue = seconds;
         }
 
         void ShowNotification(string notification, bool isError)
@@ -87,7 +118,9 @@ namespace ServerManagev1._0
             LoadListDrives();
             PDCSS = new ProcessDisconnectSessions(listSessions.ToArray(), MAXTIME);
             processMSSQL = new ProcessMSSQL();
-            barEditItemTimeToLogOff.EditValue = MAXTIME;
+            //barEditItemTimeToLogOff_Minutes.EditValue = 0;
+            //barEditItemTimeToLogOff.EditValue = MAXTIME;
+            LoadTimeToLogoff();
             LoadComboBox_ServerRole();
             lbl_Notification.Text = "";
         }
@@ -758,13 +791,37 @@ namespace ServerManagev1._0
             if(!Regex.IsMatch(barEditItemTimeToLogOff.EditValue.ToString(), @"^\d+$"))
             {
                 ShowNotification("Thời gian (giây) phải là số tự nhiên lớn hơn 0. Không được chứa chữ cái hay ký tự!!", true);
-                barEditItemTimeToLogOff.EditValue = MAXTIME;
+                LoadTimeToLogoff();
             }
-            else
+            //else
+            //{
+            //    MAXTIME = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
+            //    PDCSS.MaxTime = MAXTIME;
+            //}
+        }
+
+        private void barEditItemTimeToLogOff_Minutes_EditValueChanged(object sender, EventArgs e)
+        {
+            int minutes, seconds;
+            if (!Regex.IsMatch(barEditItemTimeToLogOff_Minutes.EditValue.ToString(), @"^\d+$"))
             {
-                MAXTIME = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
-                PDCSS.MaxTime = MAXTIME;
+                ShowNotification("Thời gian (giây) phải là số tự nhiên lớn hơn 0. Không được chứa chữ cái hay ký tự!!", true);
+                LoadTimeToLogoff();
             }
+            //else
+            //{
+            //    minutes = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
+            //    seconds = Int32.Parse(barEditItemTimeToLogOff_Minutes.EditValue.ToString());
+            //    MAXTIME = seconds * 60 + minutes;
+            //    PDCSS.MaxTime = MAXTIME;
+            //}
+        }
+
+        private void btnUpdateTimeToLogoff_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int seconds = Int32.Parse(barEditItemTimeToLogOff.EditValue.ToString());
+            int minutes = Int32.Parse(barEditItemTimeToLogOff_Minutes.EditValue.ToString());
+            LoadTimeToLogoff(minutes, seconds);
         }
 
         private void btnThemUserMSSQL_ItemClick(object sender, ItemClickEventArgs e)

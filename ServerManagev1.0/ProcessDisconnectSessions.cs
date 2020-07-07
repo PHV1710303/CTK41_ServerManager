@@ -123,6 +123,7 @@ namespace ServerManagev1._0
             }
             else
             {
+                fs = new FileStream(fileName, FileMode.Create);
                 return null;
             }
 
