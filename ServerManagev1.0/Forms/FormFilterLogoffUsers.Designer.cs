@@ -35,17 +35,21 @@
             this.gridView_FilterUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fluentDesignFormContainer1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.toolbarFormManager1 = new DevExpress.XtraBars.ToolbarForm.ToolbarFormManager(this.components);
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.lbl_Notification = new System.Windows.Forms.Label();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnInsert = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.gridListUser = new DevExpress.XtraGrid.GridControl();
             this.gridView_ListUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.toolbarFormManager1 = new DevExpress.XtraBars.ToolbarForm.ToolbarFormManager(this.components);
-            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.btnRemoveUser = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddUser = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -55,9 +59,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridListFilterLogoffUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_FilterUsers)).BeginInit();
             this.fluentDesignFormContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toolbarFormManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_ListUsers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.toolbarFormManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_UserName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,6 +103,10 @@
             // 
             // fluentDesignFormContainer1
             // 
+            this.fluentDesignFormContainer1.Controls.Add(this.labelControl5);
+            this.fluentDesignFormContainer1.Controls.Add(this.labelControl4);
+            this.fluentDesignFormContainer1.Controls.Add(this.textEdit2);
+            this.fluentDesignFormContainer1.Controls.Add(this.textEdit1);
             this.fluentDesignFormContainer1.Controls.Add(this.lbl_Notification);
             this.fluentDesignFormContainer1.Controls.Add(this.btnDelete);
             this.fluentDesignFormContainer1.Controls.Add(this.btnInsert);
@@ -114,68 +124,37 @@
             this.fluentDesignFormContainer1.Size = new System.Drawing.Size(781, 545);
             this.fluentDesignFormContainer1.TabIndex = 4;
             // 
-            // lbl_Notification
+            // labelControl5
             // 
-            this.lbl_Notification.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbl_Notification.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Notification.Location = new System.Drawing.Point(0, 529);
-            this.lbl_Notification.Name = "lbl_Notification";
-            this.lbl_Notification.Size = new System.Drawing.Size(781, 16);
-            this.lbl_Notification.TabIndex = 10;
-            this.lbl_Notification.Text = "label1";
-            this.lbl_Notification.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Location = new System.Drawing.Point(386, 455);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(36, 22);
+            this.labelControl5.TabIndex = 14;
+            this.labelControl5.Text = "Max";
             // 
-            // btnDelete
+            // labelControl4
             // 
-            this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(270, 192);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(40, 29);
-            this.btnDelete.TabIndex = 9;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.labelControl4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl4.Appearance.Options.UseFont = true;
+            this.labelControl4.Location = new System.Drawing.Point(386, 409);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(32, 22);
+            this.labelControl4.TabIndex = 13;
+            this.labelControl4.Text = "Min";
             // 
-            // btnInsert
+            // textEdit2
             // 
-            this.btnInsert.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInsert.ImageOptions.Image")));
-            this.btnInsert.Location = new System.Drawing.Point(270, 152);
-            this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(40, 29);
-            this.btnInsert.TabIndex = 8;
-            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(424, 7);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(174, 17);
-            this.labelControl3.TabIndex = 7;
-            this.labelControl3.Text = "Danh sách User đang remote";
-            // 
-            // gridListUser
-            // 
-            this.gridListUser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridListUser.Location = new System.Drawing.Point(316, 29);
-            this.gridListUser.MainView = this.gridView_ListUsers;
-            this.gridListUser.MenuManager = this.toolbarFormManager1;
-            this.gridListUser.Name = "gridListUser";
-            this.gridListUser.Size = new System.Drawing.Size(453, 327);
-            this.gridListUser.TabIndex = 6;
-            this.gridListUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView_ListUsers});
-            this.gridListUser.Click += new System.EventHandler(this.gridListUser_Click);
-            // 
-            // gridView_ListUsers
-            // 
-            this.gridView_ListUsers.GridControl = this.gridListUser;
-            this.gridView_ListUsers.Name = "gridView_ListUsers";
-            this.gridView_ListUsers.OptionsBehavior.Editable = false;
-            this.gridView_ListUsers.OptionsBehavior.ReadOnly = true;
-            this.gridView_ListUsers.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView_ListUsers.OptionsView.ShowGroupPanel = false;
+            this.textEdit2.Location = new System.Drawing.Point(430, 451);
+            this.textEdit2.MenuManager = this.toolbarFormManager1;
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit2.Properties.Appearance.Options.UseFont = true;
+            this.textEdit2.Size = new System.Drawing.Size(78, 28);
+            this.textEdit2.TabIndex = 12;
             // 
             // toolbarFormManager1
             // 
@@ -216,6 +195,79 @@
             this.barDockControlRight.Location = new System.Drawing.Point(781, 0);
             this.barDockControlRight.Manager = this.toolbarFormManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 545);
+            // 
+            // textEdit1
+            // 
+            this.textEdit1.Location = new System.Drawing.Point(430, 405);
+            this.textEdit1.MenuManager = this.toolbarFormManager1;
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit1.Properties.Appearance.Options.UseFont = true;
+            this.textEdit1.Size = new System.Drawing.Size(78, 28);
+            this.textEdit1.TabIndex = 11;
+            // 
+            // lbl_Notification
+            // 
+            this.lbl_Notification.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbl_Notification.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Notification.Location = new System.Drawing.Point(0, 529);
+            this.lbl_Notification.Name = "lbl_Notification";
+            this.lbl_Notification.Size = new System.Drawing.Size(781, 16);
+            this.lbl_Notification.TabIndex = 10;
+            this.lbl_Notification.Text = "label1";
+            this.lbl_Notification.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(270, 192);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(40, 29);
+            this.btnDelete.TabIndex = 9;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnInsert
+            // 
+            this.btnInsert.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInsert.ImageOptions.Image")));
+            this.btnInsert.Location = new System.Drawing.Point(270, 152);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(40, 29);
+            this.btnInsert.TabIndex = 8;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Location = new System.Drawing.Point(424, 7);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(201, 17);
+            this.labelControl3.TabIndex = 7;
+            this.labelControl3.Text = "Danh sách các phiên đang remote";
+            // 
+            // gridListUser
+            // 
+            this.gridListUser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridListUser.Location = new System.Drawing.Point(316, 29);
+            this.gridListUser.MainView = this.gridView_ListUsers;
+            this.gridListUser.MenuManager = this.toolbarFormManager1;
+            this.gridListUser.Name = "gridListUser";
+            this.gridListUser.Size = new System.Drawing.Size(453, 327);
+            this.gridListUser.TabIndex = 6;
+            this.gridListUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView_ListUsers});
+            this.gridListUser.Click += new System.EventHandler(this.gridListUser_Click);
+            // 
+            // gridView_ListUsers
+            // 
+            this.gridView_ListUsers.GridControl = this.gridListUser;
+            this.gridView_ListUsers.Name = "gridView_ListUsers";
+            this.gridView_ListUsers.OptionsBehavior.Editable = false;
+            this.gridView_ListUsers.OptionsBehavior.ReadOnly = true;
+            this.gridView_ListUsers.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView_ListUsers.OptionsView.ShowGroupPanel = false;
             // 
             // btnRemoveUser
             // 
@@ -298,15 +350,17 @@
             this.MinimumSize = new System.Drawing.Size(791, 580);
             this.Name = "FormFilterLogoffUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Danh sách Users";
+            this.Text = "Danh sách lọc";
             this.Load += new System.EventHandler(this.FormFilterLogoffUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridListFilterLogoffUsers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_FilterUsers)).EndInit();
             this.fluentDesignFormContainer1.ResumeLayout(false);
             this.fluentDesignFormContainer1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toolbarFormManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_ListUsers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.toolbarFormManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_UserName.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -336,5 +390,9 @@
         private DevExpress.XtraEditors.SimpleButton btnInsert;
         private System.Windows.Forms.Label lbl_Notification;
         private System.Windows.Forms.Timer timerRefreshSessions;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.TextEdit textEdit2;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
     }
 }

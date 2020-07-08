@@ -122,6 +122,7 @@
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.barEditItem2 = new DevExpress.XtraBars.BarEditItem();
             this.lbl_Notification = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit_Min)).BeginInit();
@@ -224,7 +225,7 @@
             this.cbbEdit_ServerRole,
             this.repositoryItemComboBox1,
             this.repositoryItemTextEdit9});
-            this.ribbonControl1.Size = new System.Drawing.Size(1301, 178);
+            this.ribbonControl1.Size = new System.Drawing.Size(1259, 178);
             this.ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
             // btnDisconnectAllSession
@@ -348,7 +349,7 @@
             // 
             // btnDeactiveUser
             // 
-            this.btnDeactiveUser.Caption = "Hủy kích hoạt User đang chọn";
+            this.btnDeactiveUser.Caption = "Vô hiệu hóa User đang chọn";
             this.btnDeactiveUser.Id = 20;
             this.btnDeactiveUser.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnDeactiveUser.ImageOptions.LargeImage")));
             this.btnDeactiveUser.Name = "btnDeactiveUser";
@@ -359,6 +360,8 @@
             this.btnActiveUser.Caption = "Kích hoạt User đang chọn";
             this.btnActiveUser.Id = 21;
             this.btnActiveUser.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnActiveUser.ImageOptions.LargeImage")));
+            this.btnActiveUser.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActiveUser.ItemAppearance.Normal.Options.UseFont = true;
             this.btnActiveUser.Name = "btnActiveUser";
             this.btnActiveUser.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnActiveUser_ItemClick);
             // 
@@ -579,7 +582,7 @@
             // 
             // btnViewLogAction
             // 
-            this.btnViewLogAction.Caption = "Xem nhật ký hoạt động";
+            this.btnViewLogAction.Caption = "Xem nhật ký hành động";
             this.btnViewLogAction.Id = 48;
             this.btnViewLogAction.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnViewLogAction.ImageOptions.LargeImage")));
             this.btnViewLogAction.Name = "btnViewLogAction";
@@ -604,7 +607,7 @@
             // 
             this.btnUpdateTimeToLogoff.Caption = "Cập nhật";
             this.btnUpdateTimeToLogoff.Id = 52;
-            this.btnUpdateTimeToLogoff.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
+            this.btnUpdateTimeToLogoff.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdateTimeToLogoff.ImageOptions.Image")));
             this.btnUpdateTimeToLogoff.Name = "btnUpdateTimeToLogoff";
             this.btnUpdateTimeToLogoff.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpdateTimeToLogoff_ItemClick);
             // 
@@ -800,7 +803,7 @@
             this.gridListSession.Location = new System.Drawing.Point(0, 178);
             this.gridListSession.MainView = this.gridView1;
             this.gridListSession.Name = "gridListSession";
-            this.gridListSession.Size = new System.Drawing.Size(1301, 443);
+            this.gridListSession.Size = new System.Drawing.Size(1259, 443);
             this.gridListSession.TabIndex = 1;
             this.gridListSession.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -907,7 +910,7 @@
             this.lbl_Notification.Location = new System.Drawing.Point(0, 595);
             this.lbl_Notification.Margin = new System.Windows.Forms.Padding(5, 0, 3, 5);
             this.lbl_Notification.Name = "lbl_Notification";
-            this.lbl_Notification.Size = new System.Drawing.Size(1301, 26);
+            this.lbl_Notification.Size = new System.Drawing.Size(1259, 26);
             this.lbl_Notification.TabIndex = 4;
             this.lbl_Notification.Text = "label";
             this.lbl_Notification.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -918,7 +921,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1301, 621);
+            this.ClientSize = new System.Drawing.Size(1259, 621);
             this.Controls.Add(this.lbl_Notification);
             this.Controls.Add(this.gridListSession);
             this.Controls.Add(this.ribbonControl1);
@@ -1050,6 +1053,7 @@
         private DevExpress.XtraBars.BarEditItem barEditItemTimeToLogOff_Minutes;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit9;
         private DevExpress.XtraBars.BarButtonItem btnUpdateTimeToLogoff;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

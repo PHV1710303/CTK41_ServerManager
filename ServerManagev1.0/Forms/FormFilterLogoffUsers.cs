@@ -63,6 +63,7 @@ namespace ServerManagev1._0
                     textEdit_UserName.Text = "";
                     lbl_Notification.ForeColor = Color.DarkGreen;
                     lbl_Notification.Text = "Thêm thành công User vào danh sách lọc!";
+                    Logging.WriteLog("", "Thêm User [" + uName + "] vào danh sách lọc");
                 }
                 else
                 {
@@ -79,13 +80,15 @@ namespace ServerManagev1._0
 
         private void btnRemoveUser_Click(object sender, EventArgs e)
         {
-            if (textEdit_UserName.Text.Trim().Length != 0)
+            string uName = textEdit_UserName.Text.Trim();
+            if (uName.Length != 0)
             {
-                PDCSS.Remove_FilterLogoffUser(textEdit_UserName.Text.Trim());
+                PDCSS.Remove_FilterLogoffUser(uName);
                 Load_ListFilter();
                 textEdit_UserName.Text = "";
                 lbl_Notification.ForeColor = Color.DarkGreen;
                 lbl_Notification.Text = "Xóa thành công User khỏi danh sách lọc!";
+                Logging.WriteLog("", "Loại bỏ User [" + uName + "] khỏi danh sách lọc");
             }
             else
             {
@@ -126,6 +129,7 @@ namespace ServerManagev1._0
                     Load_ListFilter();
                     lbl_Notification.ForeColor = Color.DarkGreen;
                     lbl_Notification.Text = "Thêm thành công User vào danh sách lọc";
+                    Logging.WriteLog("", "Thêm User [" + userName + "] vào danh sách lọc");
                 }
                 else
                 {
@@ -142,14 +146,16 @@ namespace ServerManagev1._0
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(textEdit_UserName.Text.Trim().Length != 0)
+            string uName = textEdit_UserName.Text.Trim();
+            if (uName.Length != 0)
             {
-                bool isRemove = PDCSS.Remove_FilterLogoffUser(textEdit_UserName.Text.Trim());
+                bool isRemove = PDCSS.Remove_FilterLogoffUser(uName);
                 if (isRemove == true)
                 {
                     Load_ListFilter();
                     lbl_Notification.ForeColor = Color.DarkGreen;
                     lbl_Notification.Text = "Loại bỏ thành công User khỏi danh sách lọc";
+                    Logging.WriteLog("", "Loại bỏ User [" + uName + "] khỏi danh sách lọc");
                 }
                 else
                 {

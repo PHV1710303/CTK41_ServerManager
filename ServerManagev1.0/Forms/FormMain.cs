@@ -57,6 +57,7 @@ namespace ServerManagev1._0
             MAXTIME = CaclTimeToLogoff(ref minutes, ref seconds);
             barEditItemTimeToLogOff_Minutes.EditValue = minutes;
             barEditItemTimeToLogOff.EditValue = seconds;
+            PDCSS.MaxTime = MAXTIME;
         }
 
         void LoadTimeToLogoff()
@@ -65,6 +66,7 @@ namespace ServerManagev1._0
             CaclTimeToLogoff(ref minutes, ref seconds);
             barEditItemTimeToLogOff_Minutes.EditValue = minutes;
             barEditItemTimeToLogOff.EditValue = seconds;
+            PDCSS.MaxTime = MAXTIME;
         }
 
         void ShowNotification(string notification, bool isError)
@@ -117,8 +119,6 @@ namespace ServerManagev1._0
             LoadListDrives();
             PDCSS = new ProcessDisconnectSessions(listSessions.ToArray(), MAXTIME);
             processMSSQL = new ProcessMSSQL();
-            //barEditItemTimeToLogOff_Minutes.EditValue = 0;
-            //barEditItemTimeToLogOff.EditValue = MAXTIME;
             LoadTimeToLogoff();
             LoadComboBox_ServerRole();
             lbl_Notification.Text = "";
@@ -809,6 +809,7 @@ namespace ServerManagev1._0
             int minutes = Int32.Parse(barEditItemTimeToLogOff_Minutes.EditValue.ToString());
             LoadTimeToLogoff(ref minutes, ref seconds);
             Logging.WriteLog("", "Thay đổi thời gian tự động logoff thành " + minutes + " phút " + seconds + " giây");
+            ShowNotification("Đã thay đổi thời gian tự động logoff", false);
         }
 
         private void btnThemUserMSSQL_ItemClick(object sender, ItemClickEventArgs e)
