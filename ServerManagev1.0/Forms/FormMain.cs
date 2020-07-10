@@ -822,7 +822,7 @@ namespace ServerManagev1._0
                 {
                     if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
                     {
-                        MessageBox.Show("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", "Thông báo");
+                        ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                         return;
                     }
                     min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
@@ -842,15 +842,18 @@ namespace ServerManagev1._0
 
                     if (result == 0 || result == -1)
                     {
-                        MessageBox.Show("Thất bại!", "Thông báo");
+                        ShowNotification("Thất bại!", true);
+                        Logging.WriteLog("Create account failed", "Tạo thất bại tài khoản SQL tên [" + username + "]");
                     }
                     else
                     {
-                        MessageBox.Show("Thành công!", "Thông báo");
+                        ShowNotification("Thành công!", false);
+                        Logging.WriteLog("Create account successful", "Tạo thành công tài khoản SQL tên [" + username + "] mật khẩu [" + password + "]");
                     }
                 }
                 else
                 {
+                    int numSuccessful = 0;
                     for (int i = min; i <= max; i++)
                     {
                         string username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
@@ -860,16 +863,22 @@ namespace ServerManagev1._0
 
                         if (result == 0 || result == -1)
                         {
-                            MessageBox.Show("Thất bại!", "Thông báo");
-                            return;
+                            ShowNotification("Thất bại!", true);
+                            Logging.WriteLog("Create account failed", "Tạo thất bại tài khoản SQL tên [" + username + "]");
                         }
+                        else
+                        {
+                            numSuccessful++;
+                            Logging.WriteLog("Create account successful", "Tạo thành công tài khoản SQL tên [" + username + "] mật khẩu [" + password + "]");
+                        }
+                        if(numSuccessful == (max - min + 1))
+                            ShowNotification("Thành công!", false);
                     }
-                    MessageBox.Show("Thành công!", "Thông báo");
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn tạo mới!", "Thông báo");
+                ShowNotification("Vui lòng nhập vào tên account SQL muốn tạo mới!", true);
             }
         }
 
@@ -883,7 +892,7 @@ namespace ServerManagev1._0
                 {
                     if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
                     {
-                        MessageBox.Show("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", "Thông báo");
+                        ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                         return;
                     }
                     min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
@@ -903,15 +912,18 @@ namespace ServerManagev1._0
 
                     if (result == 0 || result == -1)
                     {
-                        MessageBox.Show("Thất bại!", "Thông báo");
+                        ShowNotification("Thất bại!", true);
+                        Logging.WriteLog("Drop account failed", "Xóa thất bại tài khoản SQL tên [" + username + "]");
                     }
                     else
                     {
-                        MessageBox.Show("Thành công!", "Thông báo");
+                        ShowNotification("Thành công!", false);
+                        Logging.WriteLog("Drop account successful", "Xóa thành công tài khoản SQL tên [" + username + "]");
                     }
                 }
                 else
                 {
+                    int numSuccessful = 0;
                     for (int i = min; i <= max; i++)
                     {
                         string username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
@@ -921,16 +933,22 @@ namespace ServerManagev1._0
 
                         if (result == 0 || result == -1)
                         {
-                            MessageBox.Show("Thất bại!", "Thông báo");
-                            return;
+                            ShowNotification("Thất bại!", true);
+                            Logging.WriteLog("Drop account failed", "Xóa thất bại tài khoản SQL tên [" + username + "]");
+                        }
+                        else
+                        {
+                            numSuccessful++;
+                            Logging.WriteLog("Drop account successful", "Xóa thành công tài khoản SQL tên [" + username + "]");
                         }
                     }
-                    MessageBox.Show("Thành công!", "Thông báo");
+                    if (numSuccessful == (max - min + 1))
+                        ShowNotification("Thành công!", false);
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn xóa bỏ!", "Thông báo");
+                ShowNotification("Vui lòng nhập vào tên account SQL muốn xóa bỏ!", true);
             }
         }
 
@@ -957,7 +975,8 @@ namespace ServerManagev1._0
 
             if(ribbonPageGroup_Permission.Text == null || ribbonPageGroup_Permission.Text.Trim().Equals(""))
             {
-                MessageBox.Show("Vui lòng chọn quyền muốn cấp!", "Thông báo");
+                ShowNotification("Vui lòng chọn quyền muốn cấp!", true);
+                return;
             }
             else
             {
@@ -970,7 +989,7 @@ namespace ServerManagev1._0
                 {
                     if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
                     {
-                        MessageBox.Show("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", "Thông báo");
+                        ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                         return;
                     }
                     min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
@@ -990,15 +1009,18 @@ namespace ServerManagev1._0
 
                     if (result == 0 || result == -1)
                     {
-                        MessageBox.Show("Thất bại!", "Thông báo");
+                        ShowNotification("Thất bại!", true);
+                        Logging.WriteLog("Grant permission failed", "Cấp thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                     else
                     {
-                        MessageBox.Show("Thành công!", "Thông báo");
+                        ShowNotification("Thành công!", false);
+                        Logging.WriteLog("Grant permission successful", "Cấp thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                 }
                 else
                 {
+                    int numSuccessful = 0;
                     for (int i = min; i <= max; i++)
                     {
                         username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
@@ -1007,16 +1029,22 @@ namespace ServerManagev1._0
 
                         if (result == 0 || result == -1)
                         {
-                            MessageBox.Show("Thất bại!", "Thông báo");
-                            return;
+                            ShowNotification("Thất bại!", true);
+                            Logging.WriteLog("Grant permission failed", "Cấp thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                        }
+                        else
+                        {
+                            numSuccessful++;
+                            Logging.WriteLog("Grant permission successful", "Cấp thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
                         }
                     }
-                    MessageBox.Show("Thành công!", "Thông báo");
+                    if(numSuccessful == (max - min + 1))
+                        ShowNotification("Thành công!", false);
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn cấp quyền!", "Thông báo");
+                ShowNotification("Vui lòng nhập vào tên account SQL muốn cấp quyền!", true);
             }
         }
 
@@ -1027,7 +1055,8 @@ namespace ServerManagev1._0
 
             if (ribbonPageGroup_Permission.Text == null || ribbonPageGroup_Permission.Text.Trim().Equals(""))
             {
-                MessageBox.Show("Vui lòng chọn quyền muốn cấp!", "Thông báo");
+                ShowNotification("Vui lòng chọn quyền muốn cấp!", true);
+                return;
             }
             else
             {
@@ -1040,7 +1069,7 @@ namespace ServerManagev1._0
                 {
                     if (!Regex.IsMatch(barEditItemSQLUserMin.EditValue.ToString(), @"^\d+$") || !Regex.IsMatch(barEditItemSQLUserMax.EditValue.ToString(), @"^\d+$"))
                     {
-                        MessageBox.Show("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", "Thông báo");
+                        ShowNotification("Bạn đã nhập sai định dạng min, max. Chỉ được nhập số tự nhiên", true);
                         return;
                     }
                     min = Int32.Parse(barEditItemSQLUserMin.EditValue.ToString());
@@ -1060,15 +1089,18 @@ namespace ServerManagev1._0
 
                     if (result == 0 || result == -1)
                     {
-                        MessageBox.Show("Thất bại!", "Thông báo");
+                        ShowNotification("Thất bại!", true);
+                        Logging.WriteLog("Deny permission failed", "Hủy thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                     else
                     {
-                        MessageBox.Show("Thành công!", "Thông báo");
+                        ShowNotification("Thành công!", false);
+                        Logging.WriteLog("Deny permission successful", "Hủy thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                 }
                 else
                 {
+                    int numSuccessful = 0;
                     for (int i = min; i <= max; i++)
                     {
                         username = barEditItemSQLUsername.EditValue.ToString() + i.ToString();
@@ -1077,16 +1109,22 @@ namespace ServerManagev1._0
 
                         if (result == 0 || result == -1)
                         {
-                            MessageBox.Show("Thất bại!", "Thông báo");
-                            return;
+                            ShowNotification("Thất bại!", true);
+                            Logging.WriteLog("Deny permission failed", "Hủy thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                        }
+                        else
+                        {
+                            numSuccessful++;
+                            Logging.WriteLog("Deny permission successful", "Hủy thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
                         }
                     }
-                    MessageBox.Show("Thành công!", "Thông báo");
+                    if (numSuccessful == (max - min + 1))
+                        ShowNotification("Thành công!", false);
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập vào tên account SQL muốn cấp quyền!", "Thông báo");
+                ShowNotification("Vui lòng nhập vào tên account SQL muốn cấp quyền!", true);
             }
         }
 
