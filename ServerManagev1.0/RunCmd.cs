@@ -24,14 +24,14 @@ namespace ServerManagev1._0
 
             if(execCommand("net", "user " + username + " " + password + " /add",ref result) == false)
             {
-                Logging.WriteLog(result, "Tạo mới thất bại User: " + username);
+                Logging.WriteLog(result, "Thất bại khi tạo mới User: " + username);
                 return false;
             }
             Logging.WriteLog(result, "Tạo mới User: " + username);
 
             if(execCommand("net", "localgroup " + @"""Remote Desktop Users""" + " " + username + " /add", ref result) == false)
             {
-                Logging.WriteLog(result, "Thêm thất bại User " + username + " vào nhóm \"Remote Desktop Users\"");
+                Logging.WriteLog(result, "Thất bại khi thêm User " + username + " vào nhóm \"Remote Desktop Users\"");
                 return false;
             }
             Logging.WriteLog(result, "Thêm User " + username + " vào nhóm \"Remote Desktop Users\"");
@@ -45,7 +45,7 @@ namespace ServerManagev1._0
             string result = null;
             if(execCommand("net", "user " + username + " /delete",ref result) == false)
             {
-                Logging.WriteLog(result, "Xóa bỏ thất bại User: " + username);
+                Logging.WriteLog(result, "Thất bại khi xóa bỏ User: " + username);
                 return false;
             }
             Logging.WriteLog(result, "Xóa bỏ User: " + username);
@@ -59,7 +59,7 @@ namespace ServerManagev1._0
 
             if (execCommand("cmd.exe", "/C net user " + username + " /active:yes", ref result) == false)
             {
-                Logging.WriteLog(result, "Kích hoạt thất bại User: " + username);
+                Logging.WriteLog(result, "Thất bại khi kích hoạt User: " + username);
                 return false;
             }
             Logging.WriteLog(result, "Kích hoạt User: " + username);
@@ -75,7 +75,7 @@ namespace ServerManagev1._0
             // Net user username / Passwordchg:No
             if(execCommand("cmd.exe", "/C net user " + username + " /Passwordchg:No", ref result) == false)
             {
-                Logging.WriteLog(result, "Hủy quyền đổi mật khẩu thất bại User: " + username);
+                Logging.WriteLog(result, "Thất bại khi hủy quyền đổi mật khẩu User: " + username);
                 return false;
             }
             Logging.WriteLog(result, "Không cho phép User [" + username + "] đổi mật khẩu");
@@ -91,10 +91,10 @@ namespace ServerManagev1._0
             string result = null;
             if(execCommand("cmd.exe", "/C net user " + username + " /active:no", ref result) == false)
             {
-                Logging.WriteLog(result, "Hủy kích hoạt thất bại User: " + username);
+                Logging.WriteLog(result, "Thất bại khi vô hiệu hóa User: " + username);
                 return false;
             }
-            Logging.WriteLog(result, "Hủy kích hoạt User: " + username);
+            Logging.WriteLog(result, "Vô hiệu hóa User: " + username);
 
             //Change password after next login
             //net user username /logonpasswordchg:no
@@ -107,10 +107,10 @@ namespace ServerManagev1._0
             // Net user username / Passwordchg:No
             if (execCommand("cmd.exe", "/C net user " + username + " /Passwordchg:yes", ref result) == false)
             {
-                Logging.WriteLog(result, "Cho phép thay đổi mật khẩu thất bại User: " + username);
+                Logging.WriteLog(result, "Thất bại khi cho phép User " + username + " thay đổi mật khẩu.");
                 return false;
             }
-            Logging.WriteLog(result, "Cho phép thay đổi mật khẩu User: " + username);
+            Logging.WriteLog(result, "Cho phép User " + username + " thay đổi mật khẩu");
 
             return true;
         }
@@ -123,7 +123,7 @@ namespace ServerManagev1._0
             // Lệnh tạo folder mới tương ứng với tên user
             if (execCommand("cmd.exe", "/c mkdir " + partition + @":\" + username, ref result) == false)
             {
-                Logging.WriteLog(result, "Tạo thất bại folder tên [" + username + "] tại phân vùng " + partition);
+                Logging.WriteLog(result, "Thất bại khi tạo folder tên [" + username + "] tại phân vùng " + partition);
                 return false;
             }
             Logging.WriteLog(result, "Tạo folder mới tên [" + username + "] tại phân vùng " + partition);
@@ -131,10 +131,10 @@ namespace ServerManagev1._0
             // Lệnh cấp full quyền folder cho user tương ứng
             if (execCommand("cmd.exe", "/c cacls " + partition + @":\" + username + " /e /p " + username + ":f", ref result) == false)
             {
-                Logging.WriteLog(result, "Cấp quyền thất bại folder [" + partition + @":\" + username + "] cho User " + username);
+                Logging.WriteLog(result, "Thất bại khi cấp quyền folder [" + partition + @":\" + username + "] cho User " + username);
                 return false;
             }
-            Logging.WriteLog(result, "Cấp quyền full quyền folder [" + partition + @":\" + username + "] cho User " + username);
+            Logging.WriteLog(result, "Cấp full quyền folder [" + partition + @":\" + username + "] cho User " + username);
 
             return true;
         }
@@ -162,7 +162,7 @@ namespace ServerManagev1._0
 
             if(execCommand("cmd.exe", "/c rmdir " + partition + @":\" + username + " /s /q",ref result) == false)
             {
-                Logging.WriteLog(result, "Xóa thất bại folder tên [" + username + "] tại phân vùng " + partition);
+                Logging.WriteLog(result, "Thất bại khi xóa folder tên [" + username + "] tại phân vùng " + partition);
                 return false;
             }
             Logging.WriteLog(result, "Xóa folder tên [" + username + "] tại phân vùng " + partition);

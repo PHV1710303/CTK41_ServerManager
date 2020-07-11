@@ -152,7 +152,7 @@ namespace ServerManagev1._0
                         }
                         else
                         {
-                            Logging.WriteLogSessions("User " + listSessions[i].userName + " đã bị ngắt kết nối thất bại bởi Admin", "Manual Disconnect");
+                            Logging.WriteLogSessions("Admin thất bại khi ngắt kết nối User " + listSessions[i].userName, "Manual Disconnect");
                             numError++;
                         }
                     }
@@ -186,7 +186,7 @@ namespace ServerManagev1._0
             }
             else
             {
-                Logging.WriteLogSessions("User " + userName + " đã bị ngắt kết nối thất bại bởi Admin", "Manual Disconnect");
+                Logging.WriteLogSessions("Admin thất bại khi ngắt kết nối User " + userName, "Manual Disconnect");
                 ShowNotification("Thất bại", true);
             }
         }
@@ -214,11 +214,11 @@ namespace ServerManagev1._0
                     result = ListSessions.LogofftUserSession(WTS_CURRENT_SERVER_HANDLE, listSessions[i].sessionID, false);
                     if (result)
                     {
-                        Logging.WriteLogSessions("User " + listSessions[i].userName + " đã bị tắt bởi Admin", "Manual Disconnect");
+                        Logging.WriteLogSessions("User " + listSessions[i].userName + " đã bị tắt bởi Admin", "Manual Logoff");
                     }
                     else
                     {
-                        Logging.WriteLogSessions("User " + listSessions[i].userName + " đã bị tắt thất bại bởi Admin", "Manual Disconnect");
+                        Logging.WriteLogSessions("Admin thất bại khi tắt User " + listSessions[i].userName, "Manual Logoff");
                         numError++;
                     }
                 }
@@ -252,7 +252,7 @@ namespace ServerManagev1._0
             }
             else
             {
-                Logging.WriteLogSessions("User " + userName + " đã bị tắt thất bại bởi Admin", "Manual Logoff");
+                Logging.WriteLogSessions("Admin thất bại khi tắt User " + userName, "Manual Logoff");
                 ShowNotification("Thất bại", true);
             }
         }
@@ -843,12 +843,12 @@ namespace ServerManagev1._0
                     if (result == 0 || result == -1)
                     {
                         ShowNotification("Thất bại!", true);
-                        Logging.WriteLog("Create account failed", "Tạo thất bại tài khoản SQL tên [" + username + "]");
+                        Logging.WriteLog("Create account failed", "Thất bại khi tạo tài khoản SQL tên [" + username + "]");
                     }
                     else
                     {
                         ShowNotification("Thành công!", false);
-                        Logging.WriteLog("Create account successful", "Tạo thành công tài khoản SQL tên [" + username + "] mật khẩu [" + password + "]");
+                        Logging.WriteLog("Create account successful", "Tạo tài khoản SQL tên [" + username + "] mật khẩu [" + password + "]");
                     }
                 }
                 else
@@ -864,12 +864,12 @@ namespace ServerManagev1._0
                         if (result == 0 || result == -1)
                         {
                             ShowNotification("Thất bại!", true);
-                            Logging.WriteLog("Create account failed", "Tạo thất bại tài khoản SQL tên [" + username + "]");
+                            Logging.WriteLog("Create account failed", "Thất bại khi tạo tài khoản SQL tên [" + username + "]");
                         }
                         else
                         {
                             numSuccessful++;
-                            Logging.WriteLog("Create account successful", "Tạo thành công tài khoản SQL tên [" + username + "] mật khẩu [" + password + "]");
+                            Logging.WriteLog("Create account successful", "Tạo tài khoản SQL tên [" + username + "] mật khẩu [" + password + "]");
                         }
                         if(numSuccessful == (max - min + 1))
                             ShowNotification("Thành công!", false);
@@ -913,12 +913,12 @@ namespace ServerManagev1._0
                     if (result == 0 || result == -1)
                     {
                         ShowNotification("Thất bại!", true);
-                        Logging.WriteLog("Drop account failed", "Xóa thất bại tài khoản SQL tên [" + username + "]");
+                        Logging.WriteLog("Drop account failed", "Thất bại khi xóa tài khoản SQL tên [" + username + "]");
                     }
                     else
                     {
                         ShowNotification("Thành công!", false);
-                        Logging.WriteLog("Drop account successful", "Xóa thành công tài khoản SQL tên [" + username + "]");
+                        Logging.WriteLog("Drop account successful", "Xóa tài khoản SQL tên [" + username + "]");
                     }
                 }
                 else
@@ -934,12 +934,12 @@ namespace ServerManagev1._0
                         if (result == 0 || result == -1)
                         {
                             ShowNotification("Thất bại!", true);
-                            Logging.WriteLog("Drop account failed", "Xóa thất bại tài khoản SQL tên [" + username + "]");
+                            Logging.WriteLog("Drop account failed", "Thất bại khi xóa tài khoản SQL tên [" + username + "]");
                         }
                         else
                         {
                             numSuccessful++;
-                            Logging.WriteLog("Drop account successful", "Xóa thành công tài khoản SQL tên [" + username + "]");
+                            Logging.WriteLog("Drop account successful", "Xóa tài khoản SQL tên [" + username + "]");
                         }
                     }
                     if (numSuccessful == (max - min + 1))
@@ -1010,12 +1010,12 @@ namespace ServerManagev1._0
                     if (result == 0 || result == -1)
                     {
                         ShowNotification("Thất bại!", true);
-                        Logging.WriteLog("Grant permission failed", "Cấp thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                        Logging.WriteLog("Grant permission failed", "Thất bại khi cấp quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                     else
                     {
                         ShowNotification("Thành công!", false);
-                        Logging.WriteLog("Grant permission successful", "Cấp thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                        Logging.WriteLog("Grant permission successful", "Cấp quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                 }
                 else
@@ -1030,12 +1030,12 @@ namespace ServerManagev1._0
                         if (result == 0 || result == -1)
                         {
                             ShowNotification("Thất bại!", true);
-                            Logging.WriteLog("Grant permission failed", "Cấp thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                            Logging.WriteLog("Grant permission failed", "Thất bại khi cấp quyền [" + permissions + "] cho tài khoản [" + username + "]");
                         }
                         else
                         {
                             numSuccessful++;
-                            Logging.WriteLog("Grant permission successful", "Cấp thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                            Logging.WriteLog("Grant permission successful", "Cấp quyền [" + permissions + "] cho tài khoản [" + username + "]");
                         }
                     }
                     if(numSuccessful == (max - min + 1))
@@ -1055,7 +1055,7 @@ namespace ServerManagev1._0
 
             if (ribbonPageGroup_Permission.Text == null || ribbonPageGroup_Permission.Text.Trim().Equals(""))
             {
-                ShowNotification("Vui lòng chọn quyền muốn cấp!", true);
+                ShowNotification("Vui lòng chọn quyền muốn thu hồi!", true);
                 return;
             }
             else
@@ -1090,12 +1090,12 @@ namespace ServerManagev1._0
                     if (result == 0 || result == -1)
                     {
                         ShowNotification("Thất bại!", true);
-                        Logging.WriteLog("Deny permission failed", "Hủy thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                        Logging.WriteLog("Deny permission failed", "Thất bại khi thu hồi quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                     else
                     {
                         ShowNotification("Thành công!", false);
-                        Logging.WriteLog("Deny permission successful", "Hủy thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                        Logging.WriteLog("Deny permission successful", "Thu hồi quyền [" + permissions + "] cho tài khoản [" + username + "]");
                     }
                 }
                 else
@@ -1110,12 +1110,12 @@ namespace ServerManagev1._0
                         if (result == 0 || result == -1)
                         {
                             ShowNotification("Thất bại!", true);
-                            Logging.WriteLog("Deny permission failed", "Hủy thất bại quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                            Logging.WriteLog("Deny permission failed", "Thất bại khi thu hồi quyền [" + permissions + "] cho tài khoản [" + username + "]");
                         }
                         else
                         {
                             numSuccessful++;
-                            Logging.WriteLog("Deny permission successful", "Hủy thành công quyền [" + permissions + "] cho tài khoản [" + username + "]");
+                            Logging.WriteLog("Deny permission successful", "Thu hồi quyền [" + permissions + "] cho tài khoản [" + username + "]");
                         }
                     }
                     if (numSuccessful == (max - min + 1))
@@ -1124,7 +1124,7 @@ namespace ServerManagev1._0
             }
             else
             {
-                ShowNotification("Vui lòng nhập vào tên account SQL muốn cấp quyền!", true);
+                ShowNotification("Vui lòng nhập vào tên account SQL muốn thu hồi quyền!", true);
             }
         }
 
